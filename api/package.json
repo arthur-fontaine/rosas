@@ -7,10 +7,13 @@
     "test": "test"
   },
   "scripts": {
-    "test": "npm run build:ts && tsc -p test/tsconfig.test.json && tap test/**/*.test.ts",
-    "start": "npm run build:ts && fastify start -a 0.0.0.0 -l info dist/app.js",
+    "test": "tsc -p test/tsconfig.test.json && tap test/**/*.test.ts",
+    "start:compile": "npm run build:ts && fastify start -a 0.0.0.0 -l info dist/app.js",
     "build:ts": "tsc",
-    "dev": "tsc && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\"  \"tsc -w\" \"fastify start -w -l info -P dist/app.js\""
+    "dev": "tsc && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\"  \"tsc -w\" \"fastify start -w -l info -P dist/app.js\"",
+    "start": "fastify start -a 0.0.0.0 -l info dist/app.js",
+    "tsc": "tsc",
+    "postinstall": "npm run tsc"
   },
   "keywords": [],
   "author": "",
