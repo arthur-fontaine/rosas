@@ -6,6 +6,7 @@ export const podcasts = (podcasts: IPodcastsAPI): Feed[] => {
 	return podcasts.results.map<Feed>((p) => {
 		return {
 			title: p.collectionName,
+			feedUrl: p.feedUrl,
 			iconUrl: p.artworkUrl600,
 			author: p.artistName,
 			lastUpdated: p.releaseDate,
@@ -18,6 +19,7 @@ export const news = (news: INewsAPI): Feed[] => {
 	return news.results.map<Feed>((n) => {
 		return {
 			title: n.title,
+			feedUrl: n.feedId.replace('feed/', ''),
 			iconUrl: n.iconUrl,
 			website: n.website,
 			lastUpdated: new Date(n.lastUpdated),
