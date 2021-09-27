@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:rosas/models/PapersResults.dart';
 import 'package:rosas/models/PodcastsResults.dart';
@@ -14,11 +16,19 @@ class _AddSourceState extends State<AddSource> {
   List<Object> toAdd;
   List<Object> results;
 
+  Timer _debounce;
+
   @override
   void initState() {
     super.initState();
     toAdd = [];
     results = [];
+  }
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    super.dispose();
   }
 
   @override
@@ -60,13 +70,17 @@ class _AddSourceState extends State<AddSource> {
                     ),
                   ),
                   onChanged: (term) async {
-                    final search = SearchFeeds();
+                    if (_debounce?.isActive ?? false) _debounce.cancel();
+                    _debounce =
+                        Timer(const Duration(milliseconds: 500), () async {
+                      final search = SearchFeeds();
 
-                    final papers = await search.papers(term);
-                    final podcasts = await search.podcasts(term);
+                      final papers = await search.papers(term);
+                      final podcasts = await search.podcasts(term);
 
-                    setState(() {
-                      results = [...papers.results, ...podcasts.results];
+                      setState(() {
+                        results = [...papers.results, ...podcasts.results];
+                      });
                     });
                   },
                 ),
