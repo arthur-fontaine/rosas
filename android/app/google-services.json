@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "256687657388",
+    "project_id": "rosas-ce1b4",
+    "storage_bucket": "rosas-ce1b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256687657388:android:c159c4bb1fcb133ab2aa09",
+        "android_client_info": {
+          "package_name": "fr.arthurfontaine.rosas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "256687657388-i8auqe9l0fv883q252fu267k13m8haes.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCkimqEN_S1Zye6qOL-jMmheOZpgfGC8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "256687657388-i8auqe9l0fv883q252fu267k13m8haes.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "256687657388-aj9e2tepl7b88djnphqctroeo96mrk8n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "fr.arthurfontaine.rosas"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
