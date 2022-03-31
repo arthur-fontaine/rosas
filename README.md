@@ -1,28 +1,16 @@
-<!-- # Rosas
+# rosas
 
-A beautiful RSS reader. -->
-
-<p align="center">
-<img src="docs/assets/rosas-header.png" alt="rosas logo" width="50%" />
-</p>
-
-## Features
-
-- Papers (with Feedly)
-- Podcasts (with iTunes)
+A new Flutter project.
 
 ## Getting Started
 
-To build the `.apk` file for this project, use:
+This project is a starting point for a Flutter application.
 
-```bash
-flutter build apk
-```
+A few resources to get you started if this is your first Flutter project:
 
-## Mockup
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-[Figma file](https://www.figma.com/file/Q1KDyNPZQ7TtgVnvGuHVPU/Rosas?node-id=424%3A2)
-
-<p align="center">
-<img src="docs/assets/screenshots.png" alt="rosas screenshots" width="75%" />
-</p>
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
