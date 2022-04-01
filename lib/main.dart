@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(create: (context) => ThemeRepository()),
         RepositoryProvider(create: (context) => NotificationsRepository()),
         RepositoryProvider(create: (context) => ReadLaterRepository()),
+        RepositoryProvider(create: (context) => SubscribedSourcesRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -30,6 +31,10 @@ class MyApp extends StatelessWidget {
           BlocProvider<ReadLaterBloc>(
               create: (context) => ReadLaterBloc(
                   readLaterRepository: context.read<ReadLaterRepository>())),
+          BlocProvider<SubscribedSourcesBloc>(
+              create: (context) => SubscribedSourcesBloc(
+                  subscribedSourcesRepository:
+                      context.read<SubscribedSourcesRepository>())),
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {
