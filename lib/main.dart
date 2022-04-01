@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:rosas/blocs/blocs_barrel.dart';
+import 'package:rosas/generated/l10n.dart';
 import 'package:rosas/repositories/repositories_barrel.dart';
+import 'package:rosas/services/services_barrel.dart';
+import 'package:rosas/ui/pages/pages_barrel.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,25 +43,22 @@ class MyApp extends StatelessWidget {
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {
             return MaterialApp(
-              title: 'Flutter Demo',
+              title: 'Rosas',
               theme: state.themeData,
-              home: const MyHomePage(),
+              localizationsDelegates: const [
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                S.delegate,
+              ],
+              supportedLocales: const [
+                Locale('en', ''),
+                Locale('fr', ''),
+              ],
+              home: const HomePage(),
             );
           },
         ),
-      ),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(),
       ),
     );
   }

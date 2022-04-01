@@ -1,7 +1,10 @@
+import 'package:duration/duration.dart';
+import 'package:duration/locale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:html/parser.dart';
 import 'package:rosas/blocs/blocs_barrel.dart';
+import 'package:rosas/generated/l10n.dart';
 import 'package:rosas/models/models_barrel.dart';
 
 class Article extends StatelessWidget {
@@ -57,7 +60,9 @@ class Article extends StatelessWidget {
                   ? GestureDetector(
                       onTap: () {},
                       child: Text(
-                        'Read more (${article.parts.length - 1} other parts)'
+                        S
+                            .of(context)
+                            .readMore(article.parts.length - 1)
                             .toUpperCase(),
                         style: Theme.of(context)
                             .textTheme
@@ -90,7 +95,8 @@ class Article extends StatelessWidget {
               )
             : Container(),
         Padding(
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.only(
+              bottom: 16, right: 16, left: 16, top: images.isNotEmpty ? 16 : 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -107,7 +113,15 @@ class Article extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    ' / ${article.published.toIso8601String()}',
+                    ' / ${S.of(context).ago(prettyDuration(
+                          DateTime.now().difference(article.published),
+                          abbreviated: false,
+                          first: true,
+                          locale: DurationLocale.fromLanguageCode(
+                                  Localizations.localeOf(context)
+                                      .languageCode) ??
+                              const EnglishDurationLocale(),
+                        ))}',
                     style: Theme.of(context).textTheme.caption?.copyWith(
                         color: Theme.of(context).colorScheme.onBackground),
                   ),

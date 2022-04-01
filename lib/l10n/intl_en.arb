@@ -1,0 +1,29 @@
+{
+  "@@locale": "en",
+  "yourFeed": "Your feed",
+  "@yourFeed": {},
+  "readLater": "Read later",
+  "@readLater": {},
+  "unreadNotifications": "Unread notifications",
+  "@unreadNotifications": {},
+  "settings": "Settings",
+  "@settings": {},
+  "markAllAsRead": "Mark all as read",
+  "@markAllAsRead": {},
+  "readMore": "Read more ({otherPartsNumber} other parts)",
+  "@readMore": {
+    "placeholders": {
+      "otherPartsNumber": {
+        "type": "int"
+      }
+    }
+  },
+  "ago": "{formattedDuration} ago",
+  "@ago": {
+    "placeholders": {
+      "formattedDuration": {
+        "type": "String"
+      }
+    }
+  }
+}

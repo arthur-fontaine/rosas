@@ -1,0 +1,29 @@
+{
+  "@@locale": "fr",
+  "yourFeed": "Votre flux",
+  "@yourFeed": {},
+  "readLater": "À lire plus tard",
+  "@readLater": {},
+  "unreadNotifications": "Notifications non lues",
+  "@unreadNotifications": {},
+  "settings": "Paramètres",
+  "@settings": {},
+  "markAllAsRead": "Marquer tout comme lu",
+  "@markAllAsRead": {},
+  "readMore": "Lire plus (encore {otherPartsNumber} parties)",
+  "@readMore": {
+    "placeholders": {
+      "otherPartsNumber": {
+        "type": "int"
+      }
+    }
+  },
+  "ago": "il y a {formattedDuration}",
+  "@ago": {
+    "placeholders": {
+      "formattedDuration": {
+        "type": "String"
+      }
+    }
+  }
+}
