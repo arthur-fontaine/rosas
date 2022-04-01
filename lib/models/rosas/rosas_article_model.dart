@@ -1,11 +1,11 @@
 part of 'rosas_model.dart';
 
-class RosasArticle {
-  String title;
-  String url;
-  DateTime published;
-  RosasSource source;
-  late List<String> parts;
+class RosasArticle extends Equatable {
+  final String title;
+  final String url;
+  final DateTime published;
+  final RosasSource source;
+  late final List<String> parts;
 
   RosasArticle(this.title, this.url, this.published, this.source, content) {
     parts = [];
@@ -50,4 +50,7 @@ class RosasArticle {
       currentPart = [];
     }
   }
+
+  @override
+  List<Object?> get props => [title, url];
 }

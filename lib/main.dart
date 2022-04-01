@@ -13,12 +13,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
-      providers: [RepositoryProvider(create: (context) => ThemeRepository())],
+      providers: [
+        RepositoryProvider(create: (context) => ThemeRepository()),
+        RepositoryProvider(create: (context) => NotificationsRepository()),
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider<ThemeBloc>(
               create: (context) =>
-                  ThemeBloc(themeRepository: context.read<ThemeRepository>()))
+                  ThemeBloc(themeRepository: context.read<ThemeRepository>())),
+          BlocProvider<NotificationsBloc>(
+              create: (context) => NotificationsBloc(
+                  notificationsRepository:
+                      context.read<NotificationsRepository>())),
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {
