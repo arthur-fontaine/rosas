@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rosas/themes/themes_barrel.dart';
+import 'themes_barrel.dart';
 
 enum Themes { rosasDefault }
 

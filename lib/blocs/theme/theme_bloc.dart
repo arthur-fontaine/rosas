@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:rosas/repositories/repositories_barrel.dart';
-import 'package:rosas/themes/themes_barrel.dart';
+import 'package:rosas/ui/themes/themes_barrel.dart';
 
 part 'theme_event.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rosas/themes/themes_barrel.dart';
+import 'package:rosas/ui/themes/themes_barrel.dart';
 
 class ThemeRepository {
   ThemeData _themeData = rosasDefaultTheme;
