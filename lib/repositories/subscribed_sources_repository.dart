@@ -16,12 +16,4 @@ class SubscribedSourcesRepository {
   void unsubscribeSource(RosasSource source) {
     _subscribedSources.remove(source);
   }
-
-  void toggleSubscriptionSource(RosasSource source) {
-    if (!_subscribedSources.contains(source)) {
-      _subscribedSources.add(source);
-    } else {
-      _subscribedSources.remove(source);
-    }
-  }
 }

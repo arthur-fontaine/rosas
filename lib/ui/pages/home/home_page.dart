@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rosas/blocs/blocs_barrel.dart';
 import 'package:rosas/generated/l10n.dart';
+import 'package:rosas/ui/pages/pages_barrel.dart';
 import 'package:rosas/ui/widgets/widgets_barrel.dart';
 import 'widgets/banner_type_widget.dart';
 

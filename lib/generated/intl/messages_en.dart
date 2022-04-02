@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mark all as read"),
         "readLater": MessageLookupByLibrary.simpleMessage("Read later"),
         "readMore": m1,
+        "search": MessageLookupByLibrary.simpleMessage("Search"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "unreadNotifications":
             MessageLookupByLibrary.simpleMessage("Unread notifications"),

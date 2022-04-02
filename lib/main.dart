@@ -4,7 +4,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:rosas/blocs/blocs_barrel.dart';
 import 'package:rosas/generated/l10n.dart';
 import 'package:rosas/repositories/repositories_barrel.dart';
-import 'package:rosas/services/services_barrel.dart';
 import 'package:rosas/ui/pages/pages_barrel.dart';
 
 void main() {
@@ -22,6 +21,7 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(create: (context) => NotificationsRepository()),
         RepositoryProvider(create: (context) => ReadLaterRepository()),
         RepositoryProvider(create: (context) => SubscribedSourcesRepository()),
+        RepositoryProvider(create: (context) => SearchRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -39,6 +39,9 @@ class MyApp extends StatelessWidget {
               create: (context) => SubscribedSourcesBloc(
                   subscribedSourcesRepository:
                       context.read<SubscribedSourcesRepository>())),
+          BlocProvider<SearchBloc>(
+              create: (context) => SearchBloc(
+                  searchRepository: context.read<SearchRepository>())),
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {
@@ -59,6 +62,9 @@ class MyApp extends StatelessWidget {
                 switch (settings.name) {
                   case HomePage.route:
                     return MaterialPageRoute(builder: (_) => const HomePage());
+                  case SearchPage.route:
+                    return MaterialPageRoute(
+                        builder: (_) => const SearchPage());
                   default:
                     return MaterialPageRoute(builder: (_) => const HomePage());
                 }

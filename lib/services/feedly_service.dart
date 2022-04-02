@@ -31,8 +31,8 @@ class Feedly {
           topics = topicsRaw.map((topic) => RosasTopic(topic));
         }
 
-        return RosasSource(
-            RosasSourceFrom.feedly, result['feedId'], result['title'], topics);
+        return RosasSource(RosasSourceFrom.feedly, result['feedId'],
+            result['title'], topics, result['visualUrl'] ?? result['iconUrl'] ?? '');
       });
     }
 
@@ -81,9 +81,11 @@ class Feedly {
 
         if (content != null) {
           return RosasArticle(
-              item['title'],
-              item['canonicalUrl'],
-              DateTime.fromMillisecondsSinceEpoch(item['published']),
+              item['title'] ?? '',
+              item['canonicalUrl'] ?? '',
+              item['published'] != null
+                  ? DateTime.fromMillisecondsSinceEpoch(item['published'])
+                  : DateTime.now(),
               source,
               content);
         }

@@ -12,6 +12,14 @@ class RosasNotification extends Equatable {
   @override
   List<Object?> get props => [article];
 
+  DateTime get published {
+    if (type == RosasNotificationType.article && article != null) {
+      return article!.published;
+    } else {
+      return DateTime.now();
+    }
+  }
+
   RosasNotification copyWith({
     bool? read,
   }) {

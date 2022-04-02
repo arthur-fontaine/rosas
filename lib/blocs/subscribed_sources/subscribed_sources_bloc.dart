@@ -41,7 +41,12 @@ class SubscribedSourcesBloc extends Bloc<SubscribedSourcesEvent, SubscribedSourc
   }
 
   void _mapToggleSubscriptionSourceEventToState(ToggleSubscriptionSource event, Emitter<SubscribedSourcesState> emit) {
-    subscribedSourcesRepository.toggleSubscriptionSource(event.source);
+    if (state.subscribedSources.contains(event.source)) {
+      add(UnsubscribeSource(event.source));
+    } else {
+      add(SubscribeSource(event.source));
+    }
+
     add(GetSubscribedSources());
   }
 }
