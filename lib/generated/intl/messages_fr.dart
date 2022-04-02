@@ -30,6 +30,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "ago": m0,
         "markAllAsRead":
             MessageLookupByLibrary.simpleMessage("Marquer tout comme lu"),
+        "noSubscription": MessageLookupByLibrary.simpleMessage(
+            "Vous n\'avez aucun abonnement."),
+        "noSubscriptionMessage": MessageLookupByLibrary.simpleMessage(
+            "Cliquez sur le bouton recherche pour vous abonner à vos medias préférés."),
         "readLater": MessageLookupByLibrary.simpleMessage("À lire plus tard"),
         "readMore": m1,
         "search": MessageLookupByLibrary.simpleMessage("Recherche"),

@@ -84,82 +84,132 @@ class HomePage extends StatelessWidget {
       body: Container(
         constraints: const BoxConstraints.expand(),
         color: Theme.of(context).colorScheme.background,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              BlocBuilder<NotificationsBloc, NotificationsState>(
-                builder: (context, state) {
-                  if (state.notifications.isNotEmpty) {
-                    return Column(
-                      children: [
-                        const BannerTypeWidget(type: BannerType.notifications),
-                        ...(state.notifications
-                              ..sort((a, b) => b.published
-                                  .difference(a.published)
-                                  .inMilliseconds))
-                            .map((notification) {
-                          if (notification.article != null) {
-                            return Article(article: notification.article!);
+        child: BlocBuilder<SubscribedSourcesBloc, SubscribedSourcesState>(
+            builder: (context, state) {
+              if (state.subscribedSources.isNotEmpty) {
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      BlocBuilder<NotificationsBloc, NotificationsState>(
+                        builder: (context, state) {
+                          if (state.notifications.isNotEmpty) {
+                            return Column(
+                              children: [
+                                const BannerTypeWidget(
+                                    type: BannerType.notifications),
+                                ...(state.notifications
+                                      ..sort((a, b) => b.published
+                                          .difference(a.published)
+                                          .inMilliseconds))
+                                    .map((notification) {
+                                  if (notification.article != null) {
+                                    return Article(
+                                        article: notification.article!);
+                                  }
+                                }).whereType<Article>(),
+                              ],
+                            );
+                          } else {
+                            return Container();
                           }
-                        }).whereType<Article>(),
-                      ],
-                    );
-                  } else {
-                    return Container();
-                  }
-                },
-              ),
-              BlocBuilder<ReadLaterBloc, ReadLaterState>(
-                builder: (context, state) {
-                  if (state.articles.isNotEmpty) {
-                    return Column(
-                      children: [
-                        const BannerTypeWidget(type: BannerType.readLater),
-                        ...(state.articles
-                              ..sort((a, b) => b.published
-                                  .difference(a.published)
-                                  .inMilliseconds))
-                            .map((article) {
-                          return Article(article: article);
-                        }),
-                      ],
-                    );
-                  } else {
-                    return Container();
-                  }
-                },
-              ),
-              BlocBuilder<SubscribedSourcesBloc, SubscribedSourcesState>(
-                builder: (context, state) {
-                  if (state.subscribedSources.isNotEmpty) {
-                    final articles = state.subscribedSources
-                        .map((source) => source.articles)
-                        .expand((i) => i)
-                        .toList()
-                      ..sort((a, b) =>
-                          b.published.difference(a.published).inMilliseconds);
+                        },
+                      ),
+                      BlocBuilder<ReadLaterBloc, ReadLaterState>(
+                        builder: (context, state) {
+                          if (state.articles.isNotEmpty) {
+                            return Column(
+                              children: [
+                                const BannerTypeWidget(
+                                    type: BannerType.readLater),
+                                ...(state.articles
+                                      ..sort((a, b) => b.published
+                                          .difference(a.published)
+                                          .inMilliseconds))
+                                    .map((article) {
+                                  return Article(article: article);
+                                }),
+                              ],
+                            );
+                          } else {
+                            return Container();
+                          }
+                        },
+                      ),
+                      BlocBuilder<SubscribedSourcesBloc,
+                          SubscribedSourcesState>(
+                        builder: (context, state) {
+                          final articles = state.subscribedSources
+                              .map((source) => source.articles)
+                              .expand((i) => i)
+                              .toList()
+                            ..sort((a, b) => b.published
+                                .difference(a.published)
+                                .inMilliseconds);
 
-                    if (articles.isNotEmpty) {
-                      return Column(
-                        children: [
-                          const BannerTypeWidget(type: BannerType.feed),
-                          ...articles.map((article) {
-                            return Article(article: article);
-                          }),
-                        ],
-                      );
-                    } else {
-                      return Container();
-                    }
-                  } else {
-                    return Container();
-                  }
-                },
-              ),
-            ],
+                          if (articles.isNotEmpty) {
+                            return Column(
+                              children: [
+                                const BannerTypeWidget(type: BannerType.feed),
+                                ...articles.map((article) {
+                                  return Article(article: article);
+                                }),
+                              ],
+                            );
+                          } else {
+                            return Container();
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              } else {
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(48),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 48),
+                          child: Image.asset(
+                              'assets/images/no-subscription-illustration.png'),
+                        ),
+                        const SizedBox(height: 48),
+                        Column(
+                          children: [
+                            Text(S.of(context).noSubscription,
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline2
+                                    ?.copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground,
+                                    )),
+                            const SizedBox(height: 8),
+                            Text(S.of(context).noSubscriptionMessage,
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1
+                                    ?.copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground,
+                                    ))
+                          ],
+                        ),
+                        const SizedBox(height: 96),
+                      ],
+                    ),
+                  ),
+                );
+              }
+            },
           ),
         ),
-      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(

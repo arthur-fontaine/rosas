@@ -129,6 +129,26 @@ class S {
       args: [],
     );
   }
+
+  /// `You have no subscription.`
+  String get noSubscription {
+    return Intl.message(
+      'You have no subscription.',
+      name: 'noSubscription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap on the search button to subscribe to your favorite media.`
+  String get noSubscriptionMessage {
+    return Intl.message(
+      'Tap on the search button to subscribe to your favorite media.',
+      name: 'noSubscriptionMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

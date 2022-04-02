@@ -27,5 +27,9 @@
     }
   },
   "search": "Recherche",
-  "@search": {}
+  "@search": {},
+  "noSubscription": "Vous n'avez aucun abonnement.",
+  "@noSubscription": {},
+  "noSubscriptionMessage": "Cliquez sur le bouton recherche pour vous abonner à vos medias préférés.",
+  "@noSubscriptionMessage": {}
 }
