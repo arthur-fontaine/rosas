@@ -55,7 +55,14 @@ class MyApp extends StatelessWidget {
                 Locale('en', ''),
                 Locale('fr', ''),
               ],
-              home: const HomePage(),
+              onGenerateRoute: (settings) {
+                switch (settings.name) {
+                  case HomePage.route:
+                    return MaterialPageRoute(builder: (_) => const HomePage());
+                  default:
+                    return MaterialPageRoute(builder: (_) => const HomePage());
+                }
+              },
             );
           },
         ),

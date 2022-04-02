@@ -7,6 +7,7 @@ import 'package:rosas/ui/widgets/widgets_barrel.dart';
 import 'widgets/banner_type_widget.dart';
 
 class HomePage extends StatelessWidget {
+  static const String route = 'home';
   const HomePage({Key? key}) : super(key: key);
 
   @override
