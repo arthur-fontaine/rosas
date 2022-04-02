@@ -8,6 +8,7 @@ import 'widgets/banner_type_widget.dart';
 
 class HomePage extends StatelessWidget {
   static const String route = 'home';
+
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -91,7 +92,11 @@ class HomePage extends StatelessWidget {
                     return Column(
                       children: [
                         const BannerTypeWidget(type: BannerType.notifications),
-                        ...state.notifications.map((notification) {
+                        ...(state.notifications
+                              ..sort((a, b) => b.published
+                                  .difference(a.published)
+                                  .inMilliseconds))
+                            .map((notification) {
                           if (notification.article != null) {
                             return Article(article: notification.article!);
                           }
@@ -109,7 +114,11 @@ class HomePage extends StatelessWidget {
                     return Column(
                       children: [
                         const BannerTypeWidget(type: BannerType.readLater),
-                        ...state.articles.map((article) {
+                        ...(state.articles
+                              ..sort((a, b) => b.published
+                                  .difference(a.published)
+                                  .inMilliseconds))
+                            .map((article) {
                           return Article(article: article);
                         }),
                       ],
@@ -124,7 +133,10 @@ class HomePage extends StatelessWidget {
                   if (state.subscribedSources.isNotEmpty) {
                     final articles = state.subscribedSources
                         .map((source) => source.articles)
-                        .expand((i) => i);
+                        .expand((i) => i)
+                        .toList()
+                      ..sort((a, b) =>
+                          b.published.difference(a.published).inMilliseconds);
 
                     if (articles.isNotEmpty) {
                       return Column(
@@ -149,7 +161,10 @@ class HomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //  TODO: go to search page
+          Navigator.pushNamed(
+            context,
+            SearchPage.route,
+          );
         },
         backgroundColor: Theme.of(context).colorScheme.secondary,
         child: const Icon(Icons.search_rounded),
