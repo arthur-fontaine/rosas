@@ -103,10 +103,10 @@ class HomePage extends StatelessWidget {
                                           .inMilliseconds))
                                     .map((notification) {
                                   if (notification.article != null) {
-                                    return Article(
+                                    return ArticlePreview(
                                         article: notification.article!);
                                   }
-                                }).whereType<Article>(),
+                                }).whereType<ArticlePreview>(),
                               ],
                             );
                           } else {
@@ -126,7 +126,7 @@ class HomePage extends StatelessWidget {
                                           .difference(a.published)
                                           .inMilliseconds))
                                     .map((article) {
-                                  return Article(article: article);
+                                  return ArticlePreview(article: article);
                                 }),
                               ],
                             );
@@ -151,7 +151,7 @@ class HomePage extends StatelessWidget {
                               children: [
                                 const BannerTypeWidget(type: BannerType.feed),
                                 ...articles.map((article) {
-                                  return Article(article: article);
+                                  return ArticlePreview(article: article);
                                 }),
                               ],
                             );

@@ -5,6 +5,7 @@ import 'package:rosas/blocs/blocs_barrel.dart';
 import 'package:rosas/generated/l10n.dart';
 import 'package:rosas/repositories/repositories_barrel.dart';
 import 'package:rosas/ui/pages/pages_barrel.dart';
+import 'package:rosas/ui/widgets/widgets_barrel.dart';
 
 void main() {
   runApp(const MyApp());
@@ -65,6 +66,10 @@ class MyApp extends StatelessWidget {
                   case SearchPage.route:
                     return MaterialPageRoute(
                         builder: (_) => const SearchPage());
+                  case ArticlePage.route:
+                    final args = settings.arguments as ArticlePageArguments;
+                    return MaterialPageRoute(
+                        builder: (_) => ArticlePage(article: args.article));
                   default:
                     return MaterialPageRoute(builder: (_) => const HomePage());
                 }
