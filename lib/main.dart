@@ -1,21 +1,38 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:rosas/blocs/blocs_barrel.dart';
 import 'package:rosas/generated/l10n.dart';
 import 'package:rosas/repositories/repositories_barrel.dart';
+import 'package:rosas/services/services_barrel.dart';
 import 'package:rosas/ui/pages/pages_barrel.dart';
 import 'package:rosas/ui/widgets/widgets_barrel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  final prefs = await SharedPreferences.getInstance();
+  runApp(MyApp(prefs: prefs));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final SharedPreferences? prefs;
+  const MyApp({Key? key, this.prefs}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (kDebugMode) {
+      auth.signOut();
+    }
+
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (context) => ThemeRepository()),
@@ -23,6 +40,7 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(create: (context) => ReadLaterRepository()),
         RepositoryProvider(create: (context) => SubscribedSourcesRepository()),
         RepositoryProvider(create: (context) => SearchRepository()),
+        RepositoryProvider(create: (context) => AuthRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -43,9 +61,22 @@ class MyApp extends StatelessWidget {
           BlocProvider<SearchBloc>(
               create: (context) => SearchBloc(
                   searchRepository: context.read<SearchRepository>())),
+          BlocProvider<AuthBloc>(
+              create: (context) =>
+                  AuthBloc(authRepository: context.read<AuthRepository>())),
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {
+            final authBloc = context.read<AuthBloc>();
+
+            auth.userChanges().listen((User? user) {
+              if (user == null) {
+                authBloc.add(UnsetUser());
+              } else {
+                authBloc.add(ChangeUser(user));
+              }
+            });
+
             return MaterialApp(
               title: 'Rosas',
               theme: state.themeData,
@@ -70,8 +101,22 @@ class MyApp extends StatelessWidget {
                     final args = settings.arguments as ArticlePageArguments;
                     return MaterialPageRoute(
                         builder: (_) => ArticlePage(article: args.article));
+                  case AuthPage.route:
+                    return MaterialPageRoute(builder: (_) => const AuthPage());
+                  case LoginPage.route:
+                    return MaterialPageRoute(builder: (_) => const LoginPage());
+                  case SignupPage.route:
+                    return MaterialPageRoute(builder: (_) => const SignupPage());
                   default:
-                    return MaterialPageRoute(builder: (_) => const HomePage());
+                    final alreadyVisited = prefs?.getBool('already_visited');
+                    if (authBloc.state.user == null && alreadyVisited != true) {
+                    // if (true) {
+                      return MaterialPageRoute(
+                          builder: (_) => const AuthPage());
+                    } else {
+                      return MaterialPageRoute(
+                          builder: (_) => const HomePage());
+                    }
                 }
               },
             );

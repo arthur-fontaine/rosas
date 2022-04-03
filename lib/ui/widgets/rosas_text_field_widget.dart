@@ -5,8 +5,10 @@ class RosasTextField extends StatelessWidget {
   final ThemeData? theme;
   final TextEditingController? controller;
   final bool? autofocus;
+  final TextInputType? keyboardType;
+  final bool password;
 
-  const RosasTextField({Key? key, this.placeholder, this.theme, this.controller, this.autofocus}) : super(key: key);
+  const RosasTextField({Key? key, this.placeholder, this.theme, this.controller, this.autofocus, this.keyboardType, this.password = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +16,10 @@ class RosasTextField extends StatelessWidget {
       controller: controller,
       cursorColor: theme?.colorScheme.secondary,
       autofocus: autofocus ?? false,
+      obscureText: password,
+      enableSuggestions: !password,
+      autocorrect: !password,
+      keyboardType: keyboardType,
       decoration: InputDecoration(
         hintText: placeholder ?? '',
         hintStyle: theme?.textTheme.bodyText1,

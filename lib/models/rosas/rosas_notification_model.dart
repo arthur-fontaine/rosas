@@ -10,7 +10,7 @@ class RosasNotification extends Equatable {
   const RosasNotification (this.type, {this.article, this.read = false});
 
   @override
-  List<Object?> get props => [article];
+  List<Object?> get props => [article, type, read];
 
   DateTime get published {
     if (type == RosasNotificationType.article && article != null) {

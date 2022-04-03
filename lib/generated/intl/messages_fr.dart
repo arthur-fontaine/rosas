@@ -28,10 +28,20 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "ago": m0,
+        "continueWithoutLoggingIn":
+            MessageLookupByLibrary.simpleMessage("Continuer sans se connecter"),
+        "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+            "Cet email est déjà utilisée par un autre compte."),
         "learnMoreAboutBangs": MessageLookupByLibrary.simpleMessage(
             "Apprenez-en plus à propos des Rosas Bangs."),
+        "logIn": MessageLookupByLibrary.simpleMessage("Se connecter"),
         "markAllAsRead":
             MessageLookupByLibrary.simpleMessage("Marquer tout comme lu"),
+        "noEmailError": MessageLookupByLibrary.simpleMessage(
+            "Vous devez renseigner un email."),
+        "noPasswordError": MessageLookupByLibrary.simpleMessage(
+            "Vous devez renseigner un mot de passe."),
         "noSubscription": MessageLookupByLibrary.simpleMessage(
             "Vous n\'avez aucun abonnement."),
         "noSubscriptionMessage": MessageLookupByLibrary.simpleMessage(
@@ -41,6 +51,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "notificationsAndReadLaterDescription":
             MessageLookupByLibrary.simpleMessage(
                 "Retrouvez les section de vos notifications et de vos articles ajoutés aux À lire plus tard en haut de la page d\'accueil. Rosas les mettra automatiquement en avant."),
+        "password": MessageLookupByLibrary.simpleMessage("Mot de passe"),
+        "passwordsNotSame": MessageLookupByLibrary.simpleMessage(
+            "Les mots de passe ne sont pas les mêmes"),
         "readLater": MessageLookupByLibrary.simpleMessage("À lire plus tard"),
         "readMore": m1,
         "search": MessageLookupByLibrary.simpleMessage("Recherche"),
@@ -49,13 +62,26 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchWithBangsDescription": MessageLookupByLibrary.simpleMessage(
             "Recherchez des sources à travers différents services avec une recherche inspirée des Bangs DuckDuckGo."),
         "settings": MessageLookupByLibrary.simpleMessage("Paramètres"),
+        "signUp": MessageLookupByLibrary.simpleMessage(""),
+        "signUpOrLogin": MessageLookupByLibrary.simpleMessage(
+            "Créer un compte ou se connecter."),
+        "signUpOrLoginDescription": MessageLookupByLibrary.simpleMessage(
+            "Être identifié vous permet de bénéficier d\'une synchronisation entre tous vos appareils."),
         "splitReading":
             MessageLookupByLibrary.simpleMessage("Lecture fractionnée"),
         "splitReadingDescription": MessageLookupByLibrary.simpleMessage(
             "La principale fonctionnalité de Rosas est la lecture fractionnée. Au lieu de lire vos articles en énormes blocs, lisez les comme des threads Twitter, en parties de 280 caractères."),
         "tContinue": MessageLookupByLibrary.simpleMessage("Continuer"),
+        "unknownError":
+            MessageLookupByLibrary.simpleMessage("Erreur inconnue."),
         "unreadNotifications":
             MessageLookupByLibrary.simpleMessage("Notifications non lues"),
+        "userNotFound": MessageLookupByLibrary.simpleMessage(
+            "Cet email n\'est associé à aucun compte."),
+        "weakPassword": MessageLookupByLibrary.simpleMessage(
+            "Le mot de passe fourni est trop faible."),
+        "wrongPassword": MessageLookupByLibrary.simpleMessage(
+            "Le mot de passe fourni n\'est pas correct."),
         "yourFeed": MessageLookupByLibrary.simpleMessage("Votre flux")
       };
 }

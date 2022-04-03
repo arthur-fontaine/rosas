@@ -70,40 +70,42 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         leadingWidth: 100,
-        actions: !showFirstTime ? <Widget>[
-          PopupMenuButton(
-            onSelected: (value) {},
-            elevation: 2,
-            child: Container(
-              height: 36,
-              width: 48,
-              padding: const EdgeInsets.only(right: 16),
-              alignment: Alignment.centerRight,
-              child: Icon(Icons.more_vert_rounded,
-                  color: Theme.of(context).colorScheme.onBackground),
-            ),
-            shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-            itemBuilder: (BuildContext context) {
-              return [
-                PopupMenuItem(
-                  child: Text(S.of(context).settings),
-                  onTap: () {
-                    //  TODO: go to settings page
+        actions: !showFirstTime
+            ? <Widget>[
+                PopupMenuButton(
+                  onSelected: (value) {},
+                  elevation: 2,
+                  child: Container(
+                    height: 36,
+                    width: 48,
+                    padding: const EdgeInsets.only(right: 16),
+                    alignment: Alignment.centerRight,
+                    child: Icon(Icons.more_vert_rounded,
+                        color: Theme.of(context).colorScheme.onBackground),
+                  ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  itemBuilder: (BuildContext context) {
+                    return [
+                      PopupMenuItem(
+                        child: Text(S.of(context).settings),
+                        onTap: () {
+                          //  TODO: go to settings page
+                        },
+                      ),
+                      PopupMenuItem(
+                        child: Text(S.of(context).markAllAsRead),
+                        onTap: () {
+                          context
+                              .read<NotificationsBloc>()
+                              .add(ReadAllNotifications());
+                        },
+                      ),
+                    ];
                   },
                 ),
-                PopupMenuItem(
-                  child: Text(S.of(context).markAllAsRead),
-                  onTap: () {
-                    context
-                        .read<NotificationsBloc>()
-                        .add(ReadAllNotifications());
-                  },
-                ),
-              ];
-            },
-          ),
-        ] : [],
+              ]
+            : [],
       ),
       body: Stack(
         children: [
@@ -124,9 +126,9 @@ class _HomePageState extends State<HomePage> {
                                   const BannerTypeWidget(
                                       type: BannerType.notifications),
                                   ...(state.notifications
-                                    ..sort((a, b) => b.published
-                                        .difference(a.published)
-                                        .inMilliseconds))
+                                        ..sort((a, b) => b.published
+                                            .difference(a.published)
+                                            .inMilliseconds))
                                       .map((notification) {
                                     if (notification.article != null) {
                                       return ArticlePreview(
@@ -148,9 +150,9 @@ class _HomePageState extends State<HomePage> {
                                   const BannerTypeWidget(
                                       type: BannerType.readLater),
                                   ...(state.articles
-                                    ..sort((a, b) => b.published
-                                        .difference(a.published)
-                                        .inMilliseconds))
+                                        ..sort((a, b) => b.published
+                                            .difference(a.published)
+                                            .inMilliseconds))
                                       .map((article) {
                                     return ArticlePreview(article: article);
                                   }),
@@ -190,73 +192,44 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 } else {
-                  return Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(48),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 48),
-                            child: Image.asset(
-                                'assets/images/no-subscription-illustration.png'),
-                          ),
-                          const SizedBox(height: 48),
-                          Column(
-                            children: [
-                              Text(S.of(context).noSubscription,
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline2
-                                      ?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onBackground,
-                                  )),
-                              const SizedBox(height: 8),
-                              Text(S.of(context).noSubscriptionMessage,
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1
-                                      ?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onBackground,
-                                  ))
-                            ],
-                          ),
-                          const SizedBox(height: 96),
-                        ],
-                      ),
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 104),
+                    child: XState(
+                      illustration: Image.asset(
+                          'assets/images/no-subscription-illustration.png'),
+                      title: S.of(context).noSubscription,
+                      description: S.of(context).noSubscriptionMessage,
                     ),
                   );
                 }
               },
             ),
           ),
-          showFirstTime ? FirstTime(onContinue: () {
-            setState(() {
-              showFirstTime = false;
-            });
+          showFirstTime
+              ? FirstTime(onContinue: () {
+                  setState(() {
+                    showFirstTime = false;
+                  });
 
-            if (_sharedPreferences != null) {
-              _sharedPreferences!.setBool('already_visited', true);
-            }
-          }) : Container(),
+                  if (_sharedPreferences != null) {
+                    _sharedPreferences!.setBool('already_visited', true);
+                  }
+                })
+              : Container(),
         ],
       ),
-      floatingActionButton: !showFirstTime ? FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(
-            context,
-            SearchPage.route,
-          );
-        },
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-        child: const Icon(Icons.search_rounded),
-      ) : null,
+      floatingActionButton: !showFirstTime
+          ? FloatingActionButton(
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  SearchPage.route,
+                );
+              },
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              child: const Icon(Icons.search_rounded),
+            )
+          : null,
     );
   }
 }

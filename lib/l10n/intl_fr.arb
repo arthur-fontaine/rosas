@@ -17,5 +17,22 @@
   "searchWithBangs": "Recherche avec !commande",
   "searchWithBangsDescription": "Recherchez des sources à travers différents services avec une recherche inspirée des Bangs DuckDuckGo.",
   "learnMoreAboutBangs": "Apprenez-en plus à propos des Rosas Bangs.",
-  "tContinue": "Continuer"
+  "tContinue": "Continuer",
+  "signUpOrLogin": "Créer un compte ou se connecter.",
+  "signUpOrLoginDescription": "Être identifié vous permet de bénéficier d'une synchronisation entre tous vos appareils.",
+  "logIn": "Se connecter",
+  "signUp": "",
+  "continueWithoutLoggingIn": "Continuer sans se connecter",
+  "userNotFound": "Cet email n'est associé à aucun compte.",
+  "wrongPassword": "Le mot de passe fourni n'est pas correct.",
+  "noEmailError": "Vous devez renseigner un email.",
+  "noPasswordError": "Vous devez renseigner un mot de passe.",
+  "passwordsNotSame": "Les mots de passe ne sont pas les mêmes",
+  "weakPassword": "Le mot de passe fourni est trop faible.",
+  "@weakPassword": {},
+  "emailAlreadyInUse": "Cet email est déjà utilisée par un autre compte.",
+  "@emailAlreadyInUse": {},
+  "email": "Email",
+  "password": "Mot de passe",
+  "unknownError": "Erreur inconnue."
 }

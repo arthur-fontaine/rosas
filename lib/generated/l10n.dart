@@ -229,6 +229,156 @@ class S {
       args: [],
     );
   }
+
+  /// `Sign up or log in.`
+  String get signUpOrLogin {
+    return Intl.message(
+      'Sign up or log in.',
+      name: 'signUpOrLogin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Being authenticated allows you to enjoy synchronization between all your devices.`
+  String get signUpOrLoginDescription {
+    return Intl.message(
+      'Being authenticated allows you to enjoy synchronization between all your devices.',
+      name: 'signUpOrLoginDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log in`
+  String get logIn {
+    return Intl.message(
+      'Log in',
+      name: 'logIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up`
+  String get signUp {
+    return Intl.message(
+      'Sign up',
+      name: 'signUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue without logging in`
+  String get continueWithoutLoggingIn {
+    return Intl.message(
+      'Continue without logging in',
+      name: 'continueWithoutLoggingIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No user found for that email.`
+  String get userNotFound {
+    return Intl.message(
+      'No user found for that email.',
+      name: 'userNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wrong password provided for that user.`
+  String get wrongPassword {
+    return Intl.message(
+      'Wrong password provided for that user.',
+      name: 'wrongPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have to provide an email.`
+  String get noEmailError {
+    return Intl.message(
+      'You have to provide an email.',
+      name: 'noEmailError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have to provide a password.`
+  String get noPasswordError {
+    return Intl.message(
+      'You have to provide a password.',
+      name: 'noPasswordError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The passwords are not the same.`
+  String get passwordsNotSame {
+    return Intl.message(
+      'The passwords are not the same.',
+      name: 'passwordsNotSame',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The password provided is too weak.`
+  String get weakPassword {
+    return Intl.message(
+      'The password provided is too weak.',
+      name: 'weakPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The account already exists for that email.`
+  String get emailAlreadyInUse {
+    return Intl.message(
+      'The account already exists for that email.',
+      name: 'emailAlreadyInUse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown error.`
+  String get unknownError {
+    return Intl.message(
+      'Unknown error.',
+      name: 'unknownError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

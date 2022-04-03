@@ -47,7 +47,7 @@ class ArticlePage extends StatelessWidget {
                           },
                           padding: EdgeInsets.zero,
                           constraints: const BoxConstraints(),
-                          icon: const Icon(Icons.arrow_back)),
+                          icon: const Icon(Icons.arrow_back_rounded)),
                       const SizedBox(width: 16),
                       Expanded(
                         child: Column(
