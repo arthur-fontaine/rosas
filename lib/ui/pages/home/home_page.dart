@@ -5,12 +5,36 @@ import 'package:rosas/blocs/blocs_barrel.dart';
 import 'package:rosas/generated/l10n.dart';
 import 'package:rosas/ui/pages/pages_barrel.dart';
 import 'package:rosas/ui/widgets/widgets_barrel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'widgets/banner_type_widget.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   static const String route = 'home';
 
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late bool showFirstTime;
+  SharedPreferences? _sharedPreferences;
+
+  @override
+  void initState() {
+    showFirstTime = true;
+
+    SharedPreferences.getInstance().then((prefs) {
+      final alreadyVisited = prefs.getBool('already_visited');
+      setState(() {
+        showFirstTime = !(alreadyVisited == true);
+        _sharedPreferences = prefs;
+      });
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +70,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
         leadingWidth: 100,
-        actions: <Widget>[
+        actions: !showFirstTime ? <Widget>[
           PopupMenuButton(
             onSelected: (value) {},
             elevation: 2,
@@ -59,7 +83,7 @@ class HomePage extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onBackground),
             ),
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
             itemBuilder: (BuildContext context) {
               return [
                 PopupMenuItem(
@@ -79,138 +103,151 @@ class HomePage extends StatelessWidget {
               ];
             },
           ),
-        ],
+        ] : [],
       ),
-      body: Container(
-        constraints: const BoxConstraints.expand(),
-        color: Theme.of(context).colorScheme.background,
-        child: BlocBuilder<SubscribedSourcesBloc, SubscribedSourcesState>(
-            builder: (context, state) {
-              if (state.subscribedSources.isNotEmpty) {
-                return SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      BlocBuilder<NotificationsBloc, NotificationsState>(
-                        builder: (context, state) {
-                          if (state.notifications.isNotEmpty) {
-                            return Column(
-                              children: [
-                                const BannerTypeWidget(
-                                    type: BannerType.notifications),
-                                ...(state.notifications
-                                      ..sort((a, b) => b.published
-                                          .difference(a.published)
-                                          .inMilliseconds))
-                                    .map((notification) {
-                                  if (notification.article != null) {
-                                    return ArticlePreview(
-                                        article: notification.article!);
-                                  }
-                                }).whereType<ArticlePreview>(),
-                              ],
-                            );
-                          } else {
-                            return Container();
-                          }
-                        },
-                      ),
-                      BlocBuilder<ReadLaterBloc, ReadLaterState>(
-                        builder: (context, state) {
-                          if (state.articles.isNotEmpty) {
-                            return Column(
-                              children: [
-                                const BannerTypeWidget(
-                                    type: BannerType.readLater),
-                                ...(state.articles
-                                      ..sort((a, b) => b.published
-                                          .difference(a.published)
-                                          .inMilliseconds))
-                                    .map((article) {
-                                  return ArticlePreview(article: article);
-                                }),
-                              ],
-                            );
-                          } else {
-                            return Container();
-                          }
-                        },
-                      ),
-                      BlocBuilder<SubscribedSourcesBloc,
-                          SubscribedSourcesState>(
-                        builder: (context, state) {
-                          final articles = state.subscribedSources
-                              .map((source) => source.articles)
-                              .expand((i) => i)
-                              .toList()
-                            ..sort((a, b) => b.published
-                                .difference(a.published)
-                                .inMilliseconds);
-
-                          if (articles.isNotEmpty) {
-                            return Column(
-                              children: [
-                                const BannerTypeWidget(type: BannerType.feed),
-                                ...articles.map((article) {
-                                  return ArticlePreview(article: article);
-                                }),
-                              ],
-                            );
-                          } else {
-                            return Container();
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                );
-              } else {
-                return Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(48),
+      body: Stack(
+        children: [
+          Container(
+            constraints: const BoxConstraints.expand(),
+            color: Theme.of(context).colorScheme.background,
+            child: BlocBuilder<SubscribedSourcesBloc, SubscribedSourcesState>(
+              builder: (context, state) {
+                if (state.subscribedSources.isNotEmpty) {
+                  return SingleChildScrollView(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 48),
-                          child: Image.asset(
-                              'assets/images/no-subscription-illustration.png'),
+                        BlocBuilder<NotificationsBloc, NotificationsState>(
+                          builder: (context, state) {
+                            if (state.notifications.isNotEmpty) {
+                              return Column(
+                                children: [
+                                  const BannerTypeWidget(
+                                      type: BannerType.notifications),
+                                  ...(state.notifications
+                                    ..sort((a, b) => b.published
+                                        .difference(a.published)
+                                        .inMilliseconds))
+                                      .map((notification) {
+                                    if (notification.article != null) {
+                                      return ArticlePreview(
+                                          article: notification.article!);
+                                    }
+                                  }).whereType<ArticlePreview>(),
+                                ],
+                              );
+                            } else {
+                              return Container();
+                            }
+                          },
                         ),
-                        const SizedBox(height: 48),
-                        Column(
-                          children: [
-                            Text(S.of(context).noSubscription,
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline2
-                                    ?.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground,
-                                    )),
-                            const SizedBox(height: 8),
-                            Text(S.of(context).noSubscriptionMessage,
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1
-                                    ?.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground,
-                                    ))
-                          ],
+                        BlocBuilder<ReadLaterBloc, ReadLaterState>(
+                          builder: (context, state) {
+                            if (state.articles.isNotEmpty) {
+                              return Column(
+                                children: [
+                                  const BannerTypeWidget(
+                                      type: BannerType.readLater),
+                                  ...(state.articles
+                                    ..sort((a, b) => b.published
+                                        .difference(a.published)
+                                        .inMilliseconds))
+                                      .map((article) {
+                                    return ArticlePreview(article: article);
+                                  }),
+                                ],
+                              );
+                            } else {
+                              return Container();
+                            }
+                          },
                         ),
-                        const SizedBox(height: 96),
+                        BlocBuilder<SubscribedSourcesBloc,
+                            SubscribedSourcesState>(
+                          builder: (context, state) {
+                            final articles = state.subscribedSources
+                                .map((source) => source.articles)
+                                .expand((i) => i)
+                                .toList()
+                              ..sort((a, b) => b.published
+                                  .difference(a.published)
+                                  .inMilliseconds);
+
+                            if (articles.isNotEmpty) {
+                              return Column(
+                                children: [
+                                  const BannerTypeWidget(type: BannerType.feed),
+                                  ...articles.map((article) {
+                                    return ArticlePreview(article: article);
+                                  }),
+                                ],
+                              );
+                            } else {
+                              return Container();
+                            }
+                          },
+                        ),
                       ],
                     ),
-                  ),
-                );
-              }
-            },
+                  );
+                } else {
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(48),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 48),
+                            child: Image.asset(
+                                'assets/images/no-subscription-illustration.png'),
+                          ),
+                          const SizedBox(height: 48),
+                          Column(
+                            children: [
+                              Text(S.of(context).noSubscription,
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline2
+                                      ?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground,
+                                  )),
+                              const SizedBox(height: 8),
+                              Text(S.of(context).noSubscriptionMessage,
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1
+                                      ?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground,
+                                  ))
+                            ],
+                          ),
+                          const SizedBox(height: 96),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+              },
+            ),
           ),
-        ),
-      floatingActionButton: FloatingActionButton(
+          showFirstTime ? FirstTime(onContinue: () {
+            setState(() {
+              showFirstTime = false;
+            });
+
+            if (_sharedPreferences != null) {
+              _sharedPreferences!.setBool('already_visited', true);
+            }
+          }) : Container(),
+        ],
+      ),
+      floatingActionButton: !showFirstTime ? FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(
             context,
@@ -219,7 +256,7 @@ class HomePage extends StatelessWidget {
         },
         backgroundColor: Theme.of(context).colorScheme.secondary,
         child: const Icon(Icons.search_rounded),
-      ),
+      ) : null,
     );
   }
 }

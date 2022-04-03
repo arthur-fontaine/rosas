@@ -1,35 +1,21 @@
 {
   "@@locale": "fr",
   "yourFeed": "Votre flux",
-  "@yourFeed": {},
   "readLater": "À lire plus tard",
-  "@readLater": {},
   "unreadNotifications": "Notifications non lues",
-  "@unreadNotifications": {},
   "settings": "Paramètres",
-  "@settings": {},
   "markAllAsRead": "Marquer tout comme lu",
-  "@markAllAsRead": {},
   "readMore": "Lire plus (encore {otherPartsNumber} parties)",
-  "@readMore": {
-    "placeholders": {
-      "otherPartsNumber": {
-        "type": "int"
-      }
-    }
-  },
   "ago": "il y a {formattedDuration}",
-  "@ago": {
-    "placeholders": {
-      "formattedDuration": {
-        "type": "String"
-      }
-    }
-  },
   "search": "Recherche",
-  "@search": {},
   "noSubscription": "Vous n'avez aucun abonnement.",
-  "@noSubscription": {},
   "noSubscriptionMessage": "Cliquez sur le bouton recherche pour vous abonner à vos medias préférés.",
-  "@noSubscriptionMessage": {}
+  "splitReading": "Lecture fractionnée",
+  "splitReadingDescription": "La principale fonctionnalité de Rosas est la lecture fractionnée. Au lieu de lire vos articles en énormes blocs, lisez les comme des threads Twitter, en parties de 280 caractères.",
+  "notificationsAndReadLater": "Notifications et À lire plus tard",
+  "notificationsAndReadLaterDescription": "Retrouvez les section de vos notifications et de vos articles ajoutés aux À lire plus tard en haut de la page d'accueil. Rosas les mettra automatiquement en avant.",
+  "searchWithBangs": "Recherche avec !commande",
+  "searchWithBangsDescription": "Recherchez des sources à travers différents services avec une recherche inspirée des Bangs DuckDuckGo.",
+  "learnMoreAboutBangs": "Apprenez-en plus à propos des Rosas Bangs.",
+  "tContinue": "Continuer"
 }

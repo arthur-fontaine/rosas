@@ -28,16 +28,31 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "ago": m0,
+        "learnMoreAboutBangs": MessageLookupByLibrary.simpleMessage(
+            "Learn more about Rosas Bangs."),
         "markAllAsRead":
             MessageLookupByLibrary.simpleMessage("Mark all as read"),
         "noSubscription":
             MessageLookupByLibrary.simpleMessage("You have no subscription."),
         "noSubscriptionMessage": MessageLookupByLibrary.simpleMessage(
             "Tap on the search button to subscribe to your favorite media."),
+        "notificationsAndReadLater": MessageLookupByLibrary.simpleMessage(
+            "Notifications and Read later"),
+        "notificationsAndReadLaterDescription":
+            MessageLookupByLibrary.simpleMessage(
+                "Find your notifications and added articles in the Read Later section on the home page. Rosas will automatically move them to the top."),
         "readLater": MessageLookupByLibrary.simpleMessage("Read later"),
         "readMore": m1,
         "search": MessageLookupByLibrary.simpleMessage("Search"),
+        "searchWithBangs":
+            MessageLookupByLibrary.simpleMessage("Search with !command"),
+        "searchWithBangsDescription": MessageLookupByLibrary.simpleMessage(
+            "Search for sources across different services with DuckDuckGo Bangs inspired search."),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "splitReading": MessageLookupByLibrary.simpleMessage("Split reading"),
+        "splitReadingDescription": MessageLookupByLibrary.simpleMessage(
+            "The main feature of Rosas is the split reading. Instead of reading your articles in a huge block, read them as a Twitter thread, in 280 character chunks."),
+        "tContinue": MessageLookupByLibrary.simpleMessage("Continue"),
         "unreadNotifications":
             MessageLookupByLibrary.simpleMessage("Unread notifications"),
         "yourFeed": MessageLookupByLibrary.simpleMessage("Your feed")

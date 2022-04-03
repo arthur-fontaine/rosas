@@ -31,5 +31,21 @@
   "noSubscription": "You have no subscription.",
   "@noSubscription": {},
   "noSubscriptionMessage": "Tap on the search button to subscribe to your favorite media.",
-  "@noSubscriptionMessage": {}
+  "@noSubscriptionMessage": {},
+  "splitReading": "Split reading",
+  "@splitReading": {},
+  "splitReadingDescription": "The main feature of Rosas is the split reading. Instead of reading your articles in a huge block, read them as a Twitter thread, in 280 character chunks.",
+  "@splitReadingDescription": {},
+  "notificationsAndReadLater": "Notifications and Read later",
+  "@notificationsAndReadLater": {},
+  "notificationsAndReadLaterDescription": "Find your notifications and added articles in the Read Later section on the home page. Rosas will automatically move them to the top.",
+  "@notificationsAndReadLaterDescription": {},
+  "searchWithBangs": "Search with !command",
+  "@searchWithBangs": {},
+  "searchWithBangsDescription": "Search for sources across different services with DuckDuckGo Bangs inspired search.",
+  "@searchWithBangsDescription": {},
+  "learnMoreAboutBangs": "Learn more about Rosas Bangs.",
+  "@learnMoreAboutBangs": {},
+  "tContinue": "Continue",
+  "@tContinue": {}
 }

@@ -149,6 +149,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Split reading`
+  String get splitReading {
+    return Intl.message(
+      'Split reading',
+      name: 'splitReading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The main feature of Rosas is the split reading. Instead of reading your articles in a huge block, read them as a Twitter thread, in 280 character chunks.`
+  String get splitReadingDescription {
+    return Intl.message(
+      'The main feature of Rosas is the split reading. Instead of reading your articles in a huge block, read them as a Twitter thread, in 280 character chunks.',
+      name: 'splitReadingDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications and Read later`
+  String get notificationsAndReadLater {
+    return Intl.message(
+      'Notifications and Read later',
+      name: 'notificationsAndReadLater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Find your notifications and added articles in the Read Later section on the home page. Rosas will automatically move them to the top.`
+  String get notificationsAndReadLaterDescription {
+    return Intl.message(
+      'Find your notifications and added articles in the Read Later section on the home page. Rosas will automatically move them to the top.',
+      name: 'notificationsAndReadLaterDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search with !command`
+  String get searchWithBangs {
+    return Intl.message(
+      'Search with !command',
+      name: 'searchWithBangs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for sources across different services with DuckDuckGo Bangs inspired search.`
+  String get searchWithBangsDescription {
+    return Intl.message(
+      'Search for sources across different services with DuckDuckGo Bangs inspired search.',
+      name: 'searchWithBangsDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Learn more about Rosas Bangs.`
+  String get learnMoreAboutBangs {
+    return Intl.message(
+      'Learn more about Rosas Bangs.',
+      name: 'learnMoreAboutBangs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue`
+  String get tContinue {
+    return Intl.message(
+      'Continue',
+      name: 'tContinue',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
