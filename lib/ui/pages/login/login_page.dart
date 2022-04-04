@@ -5,6 +5,7 @@ import 'package:rosas/generated/l10n.dart';
 import 'package:rosas/services/services_barrel.dart';
 import 'package:rosas/ui/pages/home/home_page.dart';
 import 'package:rosas/ui/widgets/widgets_barrel.dart';
+import 'package:rosas/utils/util_barrel.dart';
 
 class LoginPage extends StatefulWidget {
   static const String route = 'login';
@@ -34,8 +35,14 @@ class _LoginPageState extends State<LoginPage> {
       });
 
       try {
-        await auth.signInWithEmailAndPassword(
+        final userCredential = await auth.signInWithEmailAndPassword(
             email: _emailController.text, password: _passwordController.text);
+        final user = userCredential.user;
+
+        if (user != null) {
+          fetchFromCloud(context, user);
+        }
+
         Navigator.pushReplacementNamed(context, HomePage.route);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {

@@ -42,9 +42,10 @@ class _SignupPageState extends State<SignupPage> {
             .createUserWithEmailAndPassword(
                 email: _emailController.text,
                 password: _passwordController.text);
+        final user = userCredential.user;
 
-        if (userCredential.user != null) {
-          users.doc(userCredential.user!.uid).set({
+        if (user != null) {
+          users.doc(user.uid).set({
             'subscribedSources': [],
             'notificationsSubscribed': [],
             'readLater': [],

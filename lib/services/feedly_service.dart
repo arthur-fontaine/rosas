@@ -87,7 +87,7 @@ class Feedly {
                   ? DateTime.fromMillisecondsSinceEpoch(item['published'])
                   : DateTime.now(),
               source,
-              content);
+              content: content);
         }
       })))
           .whereType<RosasArticle>();

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rosas/models/models_barrel.dart';
 import 'package:rosas/services/services_barrel.dart';
 
@@ -29,9 +30,23 @@ class NotificationsRepository {
         RosasNotificationType.article,
         article: article,
         read: true)));
+
+    if (auth.currentUser != null) {
+      users.doc(auth.currentUser?.uid).update({
+        "notificationsSubscribed": FieldValue.arrayUnion([source.toJSON()])
+      });
+    }
   }
 
-  void unsubscribe(RosasSource source) => _subscribedSources.remove(source);
+  void unsubscribe(RosasSource source) {
+    _subscribedSources.remove(source);
+
+    if (auth.currentUser != null) {
+      users.doc(auth.currentUser?.uid).update({
+        "notificationsSubscribed": FieldValue.arrayRemove([source.toJSON()])
+      });
+    }
+  }
 
   void fetchNotifications() async {
     final articles = (await Future.wait(_subscribedSources.map((source) {
@@ -45,6 +60,10 @@ class NotificationsRepository {
     for (var article in articles) {
       addNotification(
           RosasNotification(RosasNotificationType.article, article: article));
+
+      users.doc(auth.currentUser?.uid).update({
+        "notifications": FieldValue.arrayUnion([article.toJSON()])
+      });
     }
   }
 
@@ -54,6 +73,12 @@ class NotificationsRepository {
     final foundNotification = _notifications[foundNotificationIndex];
 
     final updatedNotification = foundNotification.copyWith(read: read);
+
+    if (notification.article != null) {
+      users.doc(auth.currentUser?.uid).update({
+        "notifications": FieldValue.arrayUnion([notification.article!.toJSON()])
+      });
+    }
 
     _notifications.removeAt(foundNotificationIndex);
     _notifications.insert(foundNotificationIndex, updatedNotification);

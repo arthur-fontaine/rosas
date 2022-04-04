@@ -110,7 +110,6 @@ class MyApp extends StatelessWidget {
                   default:
                     final alreadyVisited = prefs?.getBool('already_visited');
                     if (authBloc.state.user == null && alreadyVisited != true) {
-                    // if (true) {
                       return MaterialPageRoute(
                           builder: (_) => const AuthPage());
                     } else {
