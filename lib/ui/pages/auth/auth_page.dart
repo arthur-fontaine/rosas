@@ -33,14 +33,14 @@ class AuthPage extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              RosasButton(
+                              RosasTextButton(
                                 text: S.of(context).logIn,
                                 fill: false,
                                 onClick: () {
                                   Navigator.pushNamed(context, LoginPage.route);
                                 },
                               ),
-                              RosasButton(
+                              RosasTextButton(
                                 text: S.of(context).signUp,
                                 fill: true,
                                 onClick: () {

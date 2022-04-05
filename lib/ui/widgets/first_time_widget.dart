@@ -60,7 +60,7 @@ class FirstTime extends StatelessWidget {
                 flex: 0,
                 child: Container(
                   alignment: Alignment.centerRight,
-                  child: RosasButton(
+                  child: RosasTextButton(
                       text: S.of(context).tContinue,
                       onClick: onContinue,
                       fill: true),

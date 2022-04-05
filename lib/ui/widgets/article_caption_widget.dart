@@ -3,6 +3,7 @@ import 'package:duration/locale.dart';
 import 'package:flutter/material.dart';
 import 'package:rosas/generated/l10n.dart';
 import 'package:rosas/models/models_barrel.dart';
+import 'package:rosas/ui/pages/pages_barrel.dart';
 
 class ArticleCaption extends StatelessWidget {
   final RosasArticle article;
@@ -15,7 +16,11 @@ class ArticleCaption extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            //  TODO: open source_page
+            Navigator.pushNamed(
+              context,
+              SourcePage.route,
+              arguments: SourcePageArguments(article.source),
+            );
           },
           child: Text(
             article.source.title,

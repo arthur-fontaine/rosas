@@ -71,6 +71,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lecture fractionnée"),
         "splitReadingDescription": MessageLookupByLibrary.simpleMessage(
             "La principale fonctionnalité de Rosas est la lecture fractionnée. Au lieu de lire vos articles en énormes blocs, lisez les comme des threads Twitter, en parties de 280 caractères."),
+        "subscribe": MessageLookupByLibrary.simpleMessage("S\'abonner"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Abonné"),
         "tContinue": MessageLookupByLibrary.simpleMessage("Continuer"),
         "unknownError":
             MessageLookupByLibrary.simpleMessage("Erreur inconnue."),

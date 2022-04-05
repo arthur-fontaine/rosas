@@ -77,5 +77,9 @@
   "password": "Password",
   "@password": {},
   "unknownError": "Unknown error.",
-  "@unknownError": {}
+  "@unknownError": {},
+  "subscribed": "Subscribed",
+  "@subscribed": {},
+  "subscribe": "Subscribe",
+  "@subscribe": {}
 }

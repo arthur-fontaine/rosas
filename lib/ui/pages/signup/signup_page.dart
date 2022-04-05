@@ -143,7 +143,7 @@ class _SignupPageState extends State<SignupPage> {
                     )
                   : Container(),
               const SizedBox(height: 32),
-              RosasButton(
+              RosasTextButton(
                   text: S.of(context).signUp, fill: true, onClick: signup),
             ],
           ),

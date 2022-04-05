@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class RosasButton extends StatelessWidget {
+class RosasTextButton extends StatelessWidget {
   final String text;
   final VoidCallback? onClick;
   final bool fill;
 
-  const RosasButton({Key? key, required this.text, this.onClick, this.fill = false}) : super(key: key);
+  const RosasTextButton({Key? key, required this.text, this.onClick, this.fill = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

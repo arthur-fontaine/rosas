@@ -379,6 +379,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Subscribed`
+  String get subscribed {
+    return Intl.message(
+      'Subscribed',
+      name: 'subscribed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subscribe`
+  String get subscribe {
+    return Intl.message(
+      'Subscribe',
+      name: 'subscribe',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

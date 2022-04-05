@@ -34,5 +34,9 @@
   "@emailAlreadyInUse": {},
   "email": "Email",
   "password": "Mot de passe",
-  "unknownError": "Erreur inconnue."
+  "unknownError": "Erreur inconnue.",
+  "subscribed": "Abonné",
+  "@subscribed": {},
+  "subscribe": "S'abonner",
+  "@subscribe": {}
 }

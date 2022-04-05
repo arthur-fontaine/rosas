@@ -70,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitReading": MessageLookupByLibrary.simpleMessage("Split reading"),
         "splitReadingDescription": MessageLookupByLibrary.simpleMessage(
             "The main feature of Rosas is the split reading. Instead of reading your articles in a huge block, read them as a Twitter thread, in 280 character chunks."),
+        "subscribe": MessageLookupByLibrary.simpleMessage("Subscribe"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Subscribed"),
         "tContinue": MessageLookupByLibrary.simpleMessage("Continue"),
         "unknownError": MessageLookupByLibrary.simpleMessage("Unknown error."),
         "unreadNotifications":

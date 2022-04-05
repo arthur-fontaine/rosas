@@ -101,6 +101,10 @@ class MyApp extends StatelessWidget {
                     final args = settings.arguments as ArticlePageArguments;
                     return MaterialPageRoute(
                         builder: (_) => ArticlePage(article: args.article));
+                  case SourcePage.route:
+                    final args = settings.arguments as SourcePageArguments;
+                    return MaterialPageRoute(
+                        builder: (_) => SourcePage(source: args.source));
                   case AuthPage.route:
                     return MaterialPageRoute(builder: (_) => const AuthPage());
                   case LoginPage.route:

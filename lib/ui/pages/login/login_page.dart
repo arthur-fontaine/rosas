@@ -125,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                     )
                   : Container(),
               const SizedBox(height: 32),
-              RosasButton(
+              RosasTextButton(
                   text: S.of(context).logIn, fill: true, onClick: login),
             ],
           ),
