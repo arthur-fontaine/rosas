@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rosas/generated/l10n.dart';
-import 'package:rosas/services/services_barrel.dart';
 import 'package:rosas/ui/pages/home/home_page.dart';
 import 'package:rosas/ui/widgets/widgets_barrel.dart';
+import 'package:rosas/utils/util_barrel.dart';
 
 class SignupPage extends StatefulWidget {
   static const String route = 'sign_up';
@@ -45,12 +45,7 @@ class _SignupPageState extends State<SignupPage> {
         final user = userCredential.user;
 
         if (user != null) {
-          users.doc(user.uid).set({
-            'subscribedSources': [],
-            'notificationsSubscribed': [],
-            'readLater': [],
-            'notifications': [],
-          });
+          initUser(user);
         }
 
         Navigator.pushReplacementNamed(context, HomePage.route);

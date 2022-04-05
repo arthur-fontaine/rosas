@@ -10,6 +10,7 @@ import 'package:rosas/repositories/repositories_barrel.dart';
 import 'package:rosas/services/services_barrel.dart';
 import 'package:rosas/ui/pages/pages_barrel.dart';
 import 'package:rosas/ui/widgets/widgets_barrel.dart';
+import 'package:rosas/utils/util_barrel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 
@@ -69,11 +70,21 @@ class MyApp extends StatelessWidget {
           builder: (context, state) {
             final authBloc = context.read<AuthBloc>();
 
-            auth.userChanges().listen((User? user) {
+            auth.userChanges().listen((User? user) async {
               if (user == null) {
                 authBloc.add(UnsetUser());
               } else {
                 authBloc.add(ChangeUser(user));
+
+                try {
+                  final doc = await users.doc(user.uid).get();
+
+                  if (!doc.exists) {
+                    initUser(user);
+                  }
+                } catch (e) {
+                  rethrow;
+                }
               }
             });
 
@@ -117,6 +128,10 @@ class MyApp extends StatelessWidget {
                       return MaterialPageRoute(
                           builder: (_) => const AuthPage());
                     } else {
+                      if (authBloc.state.user == null) {
+                        auth.signInAnonymously();
+                      }
+
                       return MaterialPageRoute(
                           builder: (_) => const HomePage());
                     }
