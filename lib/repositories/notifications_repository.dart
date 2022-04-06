@@ -30,16 +30,19 @@ class NotificationsRepository {
       _subscribedSources.add(source);
 
       final sourceArticles = await Feedly.getSourceArticles(source);
-      _notifications.addAll(sourceArticles.map((article) =>
-          RosasNotification(
-              RosasNotificationType.article,
-              article: article,
-              read: true)));
+      _notifications.addAll(sourceArticles.map((article) => RosasNotification(
+          RosasNotificationType.article,
+          article: article,
+          read: true)));
 
       if (auth.currentUser != null) {
         users.doc(auth.currentUser?.uid).update({
           "notificationsSubscribed": FieldValue.arrayUnion([source.toJSON()])
         });
+      }
+
+      if (auth.currentUser == null || auth.currentUser!.isAnonymous) {
+        LocalStorage.saveData(notificationsSubscribed: _subscribedSources);
       }
     }
   }
@@ -48,9 +51,13 @@ class NotificationsRepository {
     _subscribedSources.remove(source);
 
     if (auth.currentUser != null) {
-      users.doc(auth.currentUser?.uid).update({
+      users.doc(auth.currentUser!.uid).update({
         "notificationsSubscribed": FieldValue.arrayRemove([source.toJSON()])
       });
+    }
+
+    if (auth.currentUser == null || auth.currentUser!.isAnonymous) {
+      LocalStorage.saveData(notificationsSubscribed: _subscribedSources);
     }
   }
 
@@ -67,9 +74,15 @@ class NotificationsRepository {
       addNotification(
           RosasNotification(RosasNotificationType.article, article: article));
 
-      users.doc(auth.currentUser?.uid).update({
-        "notifications": FieldValue.arrayUnion([article.toJSON()])
-      });
+      if (auth.currentUser != null) {
+        users.doc(auth.currentUser?.uid).update({
+          "notifications": FieldValue.arrayUnion([article.toJSON()])
+        });
+      }
+
+      if (auth.currentUser == null || auth.currentUser!.isAnonymous) {
+        LocalStorage.saveData(notifications: _notifications);
+      }
     }
   }
 
@@ -81,9 +94,16 @@ class NotificationsRepository {
     final updatedNotification = foundNotification.copyWith(read: read);
 
     if (notification.article != null) {
-      users.doc(auth.currentUser?.uid).update({
-        "notifications": FieldValue.arrayUnion([notification.article!.toJSON()])
-      });
+      if (auth.currentUser != null) {
+        users.doc(auth.currentUser?.uid).update({
+          "notifications":
+              FieldValue.arrayUnion([notification.article!.toJSON()])
+        });
+      }
+
+      if (auth.currentUser == null || auth.currentUser!.isAnonymous) {
+        LocalStorage.saveData(notifications: _notifications);
+      }
     }
 
     _notifications.removeAt(foundNotificationIndex);

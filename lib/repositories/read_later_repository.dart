@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rosas/models/models_barrel.dart';
-import 'package:rosas/services/firebase/auth_service.dart';
-import 'package:rosas/services/firebase/firestore_service.dart';
+import 'package:rosas/services/services_barrel.dart';
 
 class ReadLaterRepository {
   final List<RosasArticle> _articles = [];
@@ -19,6 +18,10 @@ class ReadLaterRepository {
           "readLater": FieldValue.arrayUnion([article.toJSON()])
         });
       }
+
+if (auth.currentUser == null || auth.currentUser!.isAnonymous) {
+LocalStorage.saveData(readLater: _articles);
+      }
     }
   }
 
@@ -29,6 +32,10 @@ class ReadLaterRepository {
       users.doc(auth.currentUser?.uid).update({
         "readLater": FieldValue.arrayRemove([article.toJSON()])
       });
+    }
+
+if (auth.currentUser == null || auth.currentUser!.isAnonymous) {
+LocalStorage.saveData(readLater: _articles);
     }
   }
 

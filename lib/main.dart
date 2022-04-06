@@ -64,6 +64,8 @@ class MyApp extends StatelessWidget {
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {
+            fetchFromLocal(context);
+
             final authBloc = context.read<AuthBloc>();
 
             auth.userChanges().listen((User? user) async {
@@ -98,6 +100,7 @@ class MyApp extends StatelessWidget {
                 Locale('fr', ''),
               ],
               onGenerateRoute: (settings) {
+                // TODO: add SafeArea on all routes
                 switch (settings.name) {
                   case HomePage.route:
                     return MaterialPageRoute(builder: (_) => const HomePage());

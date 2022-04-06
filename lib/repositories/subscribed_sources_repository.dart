@@ -10,7 +10,7 @@ class SubscribedSourcesRepository {
 
   List<RosasSource> getSubscribedSources() => _subscribedSources;
 
-  void subscribeSource(RosasSource source) {
+  void subscribeSource(RosasSource source) async {
     if (!_subscribedSources.contains(source)) {
       _subscribedSources.add(source);
 
@@ -18,6 +18,10 @@ class SubscribedSourcesRepository {
         users.doc(auth.currentUser?.uid).update({
           "subscribedSources": FieldValue.arrayUnion([source.toJSON()])
         });
+      }
+
+      if (auth.currentUser == null || auth.currentUser!.isAnonymous) {
+        LocalStorage.saveData(subscribedSources: _subscribedSources);
       }
     }
   }
@@ -30,6 +34,10 @@ class SubscribedSourcesRepository {
         "subscribedSources": FieldValue.arrayRemove([source.toJSON()])
       });
     }
+
+    if (auth.currentUser == null || auth.currentUser!.isAnonymous) {
+      LocalStorage.saveData(subscribedSources: _subscribedSources);
+    }
   }
 
   List<RosasArticle> getArticles() => _articles;
@@ -39,7 +47,8 @@ class SubscribedSourcesRepository {
         .map((source) async => await source.fetchArticles()));
 
     _articles.removeWhere((element) => true);
-    _articles.addAll(
-        newSources.map((source) => source.articles).expand((article) => article));
+    _articles.addAll(newSources
+        .map((source) => source.articles)
+        .expand((article) => article));
   }
 }
