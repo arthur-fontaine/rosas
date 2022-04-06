@@ -33,6 +33,6 @@ class AuthState extends Equatable {
   }) {
     return AuthState(
         status: status ?? this.status,
-        user: user ?? this.user);
+        user: user);
   }
 }

@@ -22,6 +22,14 @@ class _SignupPageState extends State<SignupPage> {
   String? error;
 
   @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
@@ -84,7 +92,7 @@ class _SignupPageState extends State<SignupPage> {
         ),
         title: Text(
           S.of(context).signUp,
-          style: Theme.of(context).textTheme.headline2?.copyWith(
+          style: Theme.of(context).textTheme.headline1?.copyWith(
                 color: Theme.of(context).colorScheme.onBackground,
               ),
         ),

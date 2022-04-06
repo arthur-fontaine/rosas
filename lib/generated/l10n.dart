@@ -260,11 +260,31 @@ class S {
     );
   }
 
+  /// `Log in to benefit from synchronization between all your devices.`
+  String get logInDescription {
+    return Intl.message(
+      'Log in to benefit from synchronization between all your devices.',
+      name: 'logInDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sign up`
   String get signUp {
     return Intl.message(
       'Sign up',
       name: 'signUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up to benefit from synchronization between all your devices.`
+  String get signUpDescription {
+    return Intl.message(
+      'Sign up to benefit from synchronization between all your devices.',
+      name: 'signUpDescription',
       desc: '',
       args: [],
     );
@@ -395,6 +415,206 @@ class S {
     return Intl.message(
       'Subscribe',
       name: 'subscribe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get account {
+    return Intl.message(
+      'Account',
+      name: 'account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change your email or your password, download your data or delete your account.`
+  String get accountSettingsDescription {
+    return Intl.message(
+      'Change your email or your password, download your data or delete your account.',
+      name: 'accountSettingsDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Theme`
+  String get theme {
+    return Intl.message(
+      'Theme',
+      name: 'theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change the theme of Rosas.`
+  String get themeSettingsDescription {
+    return Intl.message(
+      'Change the theme of Rosas.',
+      name: 'themeSettingsDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coming soon`
+  String get comingSoon {
+    return Intl.message(
+      'Coming soon',
+      name: 'comingSoon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Integrations`
+  String get integrations {
+    return Intl.message(
+      'Integrations',
+      name: 'integrations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Connect your Rosas account with Twitter or Pocket.`
+  String get integrationsSettingsDescription {
+    return Intl.message(
+      'Connect your Rosas account with Twitter or Pocket.',
+      name: 'integrationsSettingsDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Credits`
+  String get credits {
+    return Intl.message(
+      'Credits',
+      name: 'credits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resources used by Rosas.`
+  String get creditsSettingsDescription {
+    return Intl.message(
+      'Resources used by Rosas.',
+      name: 'creditsSettingsDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change password`
+  String get changePassword {
+    return Intl.message(
+      'Change password',
+      name: 'changePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change your password to ensure better security.`
+  String get changePasswordDescription {
+    return Intl.message(
+      'Change your password to ensure better security.',
+      name: 'changePasswordDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Download your data`
+  String get downloadYourData {
+    return Intl.message(
+      'Download your data',
+      name: 'downloadYourData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request all the data about you that is stored on our servers.`
+  String get downloadYourDataDescription {
+    return Intl.message(
+      'Request all the data about you that is stored on our servers.',
+      name: 'downloadYourDataDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete your account`
+  String get deleteYourAccount {
+    return Intl.message(
+      'Delete your account',
+      name: 'deleteYourAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete your account and all associated data.`
+  String get deleteYourAccountDescription {
+    return Intl.message(
+      'Delete your account and all associated data.',
+      name: 'deleteYourAccountDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log out`
+  String get logOut {
+    return Intl.message(
+      'Log out',
+      name: 'logOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify your password`
+  String get verifyPassword {
+    return Intl.message(
+      'Verify your password',
+      name: 'verifyPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change email`
+  String get changeEmail {
+    return Intl.message(
+      'Change email',
+      name: 'changeEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New password`
+  String get newPassword {
+    return Intl.message(
+      'New password',
+      name: 'newPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By deleting your account you will not be able to log in to your account. This will also delete all of your data on our servers.\nYou will still be able to recreate an account with the same email, however, you will not be able to retrieve all your subscriptions and other data.`
+  String get deleteAccountDisclaimer {
+    return Intl.message(
+      'By deleting your account you will not be able to log in to your account. This will also delete all of your data on our servers.\nYou will still be able to recreate an account with the same email, however, you will not be able to retrieve all your subscriptions and other data.',
+      name: 'deleteAccountDisclaimer',
       desc: '',
       args: [],
     );

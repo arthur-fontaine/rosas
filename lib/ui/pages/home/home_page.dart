@@ -73,7 +73,15 @@ class _HomePageState extends State<HomePage> {
         actions: !showFirstTime
             ? <Widget>[
                 PopupMenuButton(
-                  onSelected: (value) {},
+                  onSelected: (value) {
+                    if (value == 0) {
+                      Navigator.pushNamed(context, SettingsPage.route);
+                    } else if (value == 1) {
+                      context
+                          .read<NotificationsBloc>()
+                          .add(ReadAllNotifications());
+                    }
+                  },
                   elevation: 2,
                   child: Container(
                     height: 36,
@@ -89,17 +97,11 @@ class _HomePageState extends State<HomePage> {
                     return [
                       PopupMenuItem(
                         child: Text(S.of(context).settings),
-                        onTap: () {
-                          //  TODO: go to settings page
-                        },
+                        value: 0,
                       ),
                       PopupMenuItem(
                         child: Text(S.of(context).markAllAsRead),
-                        onTap: () {
-                          context
-                              .read<NotificationsBloc>()
-                              .add(ReadAllNotifications());
-                        },
+                        value: 1,
                       ),
                     ];
                   },

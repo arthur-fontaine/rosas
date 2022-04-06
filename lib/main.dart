@@ -26,14 +26,11 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final SharedPreferences? prefs;
+
   const MyApp({Key? key, this.prefs}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (kDebugMode) {
-      auth.signOut();
-    }
-
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (context) => ThemeRepository()),
@@ -121,7 +118,26 @@ class MyApp extends StatelessWidget {
                   case LoginPage.route:
                     return MaterialPageRoute(builder: (_) => const LoginPage());
                   case SignupPage.route:
-                    return MaterialPageRoute(builder: (_) => const SignupPage());
+                    return MaterialPageRoute(
+                        builder: (_) => const SignupPage());
+                  case SettingsPage.route:
+                    return MaterialPageRoute(
+                        builder: (_) => const SettingsPage());
+                  case AccountSettingsPage.route:
+                    return MaterialPageRoute(
+                        builder: (_) => const AccountSettingsPage());
+                  case CheckPasswordPage.route:
+                    final args =
+                        settings.arguments as CheckPasswordPageArguments;
+                    return MaterialPageRoute(
+                        builder: (_) =>
+                            CheckPasswordPage(callback: args.callback));
+                  case ChangeEmailPage.route:
+                    return MaterialPageRoute(builder: (_) => const ChangeEmailPage());
+                  case ChangePasswordPage.route:
+                    return MaterialPageRoute(builder: (_) => const ChangePasswordPage());
+                  case DeleteAccountPage.route:
+                    return MaterialPageRoute(builder: (_) => const DeleteAccountPage());
                   default:
                     final alreadyVisited = prefs?.getBool('already_visited');
                     if (authBloc.state.user == null && alreadyVisited != true) {

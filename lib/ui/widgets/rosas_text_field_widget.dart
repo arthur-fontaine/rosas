@@ -8,7 +8,15 @@ class RosasTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool password;
 
-  const RosasTextField({Key? key, this.placeholder, this.theme, this.controller, this.autofocus, this.keyboardType, this.password = false}) : super(key: key);
+  const RosasTextField(
+      {Key? key,
+      this.placeholder,
+      this.theme,
+      this.controller,
+      this.autofocus,
+      this.keyboardType,
+      this.password = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

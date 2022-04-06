@@ -28,6 +28,13 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   void login() async {
     if (!(_emailController.text.isEmpty || _passwordController.text.isEmpty)) {
       setState(() {
@@ -77,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         title: Text(
           S.of(context).logIn,
-          style: Theme.of(context).textTheme.headline2?.copyWith(
+          style: Theme.of(context).textTheme.headline1?.copyWith(
                 color: Theme.of(context).colorScheme.onBackground,
               ),
         ),

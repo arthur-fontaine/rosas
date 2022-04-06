@@ -7,3 +7,4 @@ export 'rosas_text_button_widget.dart';
 export 'rosas_icon_button_widget.dart';
 export 'first_time_widget.dart';
 export 'x_state_widget.dart';
+export 'setting_link_widget.dart';

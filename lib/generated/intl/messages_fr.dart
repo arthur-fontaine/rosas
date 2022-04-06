@@ -27,17 +27,48 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "account": MessageLookupByLibrary.simpleMessage("Compte"),
+        "accountSettingsDescription": MessageLookupByLibrary.simpleMessage(
+            "Changer votre email ou votre mot de passe, téléchargez vos données ou supprimez votre compte."),
         "ago": m0,
+        "changeEmail": MessageLookupByLibrary.simpleMessage("Changer l\'email"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Changez le mot de passe"),
+        "changePasswordDescription": MessageLookupByLibrary.simpleMessage(
+            "Changez votre mot de passe pour assurez une meilleure sécurité."),
+        "comingSoon":
+            MessageLookupByLibrary.simpleMessage("Bientôt disponible"),
         "continueWithoutLoggingIn":
             MessageLookupByLibrary.simpleMessage("Continuer sans se connecter"),
+        "credits": MessageLookupByLibrary.simpleMessage("Crédits"),
+        "creditsSettingsDescription": MessageLookupByLibrary.simpleMessage(
+            "Ressources utiisées par Rosas."),
+        "deleteAccountDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "En supprimant votre compte vous ne pourrez plus vous connecter à votre compte. Cela supprimera également l\'entièreté de vos données sur nos serveurs.\nVous pourrez tout de même vous recréer un compte avec le même email, cependant, vous ne pourrez pas récupérer tous vos abonnements et toutes autres données."),
+        "deleteYourAccount":
+            MessageLookupByLibrary.simpleMessage("Supprimez votre compte"),
+        "deleteYourAccountDescription": MessageLookupByLibrary.simpleMessage(
+            "Supprimez votre compte et toutes vos données."),
+        "downloadYourData":
+            MessageLookupByLibrary.simpleMessage("Téléchargez vos données"),
+        "downloadYourDataDescription": MessageLookupByLibrary.simpleMessage(
+            "Demandez une archive de toutes les données vous concernant et qui sont stockées sur nos serveurs."),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
             "Cet email est déjà utilisée par un autre compte."),
+        "integrations": MessageLookupByLibrary.simpleMessage("Intégrations"),
+        "integrationsSettingsDescription": MessageLookupByLibrary.simpleMessage(
+            "Connectez votre compte Rosas à Twitter ou Pocket."),
         "learnMoreAboutBangs": MessageLookupByLibrary.simpleMessage(
             "Apprenez-en plus à propos des Rosas Bangs."),
         "logIn": MessageLookupByLibrary.simpleMessage("Se connecter"),
+        "logInDescription": MessageLookupByLibrary.simpleMessage(
+            "Connectez-vous pour bénéficier d\'une synchronisation entre tous vos appareils."),
+        "logOut": MessageLookupByLibrary.simpleMessage("Déconnexion"),
         "markAllAsRead":
             MessageLookupByLibrary.simpleMessage("Marquer tout comme lu"),
+        "newPassword":
+            MessageLookupByLibrary.simpleMessage("Nouveau mot de passe"),
         "noEmailError": MessageLookupByLibrary.simpleMessage(
             "Vous devez renseigner un email."),
         "noPasswordError": MessageLookupByLibrary.simpleMessage(
@@ -63,6 +94,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Recherchez des sources à travers différents services avec une recherche inspirée des Bangs DuckDuckGo."),
         "settings": MessageLookupByLibrary.simpleMessage("Paramètres"),
         "signUp": MessageLookupByLibrary.simpleMessage(""),
+        "signUpDescription": MessageLookupByLibrary.simpleMessage(
+            "Inscrivez-vous pour bénéficier d\'une synchronisation entre tous vos appareils."),
         "signUpOrLogin": MessageLookupByLibrary.simpleMessage(
             "Créer un compte ou se connecter."),
         "signUpOrLoginDescription": MessageLookupByLibrary.simpleMessage(
@@ -74,12 +107,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribe": MessageLookupByLibrary.simpleMessage("S\'abonner"),
         "subscribed": MessageLookupByLibrary.simpleMessage("Abonné"),
         "tContinue": MessageLookupByLibrary.simpleMessage("Continuer"),
+        "theme": MessageLookupByLibrary.simpleMessage("Thème"),
+        "themeSettingsDescription":
+            MessageLookupByLibrary.simpleMessage("Changez le thème de Rosas."),
         "unknownError":
             MessageLookupByLibrary.simpleMessage("Erreur inconnue."),
         "unreadNotifications":
             MessageLookupByLibrary.simpleMessage("Notifications non lues"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "Cet email n\'est associé à aucun compte."),
+        "verifyPassword":
+            MessageLookupByLibrary.simpleMessage("Vérifier votre mot de passe"),
         "weakPassword": MessageLookupByLibrary.simpleMessage(
             "Le mot de passe fourni est trop faible."),
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
