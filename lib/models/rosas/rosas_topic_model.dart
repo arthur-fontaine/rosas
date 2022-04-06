@@ -1,6 +1,6 @@
 part of 'rosas_model.dart';
 
-class RosasTopic {
+class RosasTopic extends Equatable {
   String name;
 
   RosasTopic(this.name);
@@ -12,4 +12,7 @@ class RosasTopic {
   Map<String, dynamic> toJSON() {
     return {'name': name};
   }
+
+  @override
+  List<Object?> get props => [name];
 }

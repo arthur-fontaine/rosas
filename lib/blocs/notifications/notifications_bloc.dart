@@ -23,6 +23,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     on<UnreadNotification>(_mapUnreadNotificationsEventToState);
     on<ReadAllNotifications>(_mapReadAllNotificationsEventToState);
     on<UnreadAllNotifications>(_mapUnreadAllNotificationsEventToState);
+    on<GetSubscribedNotificationsSources>(_mapGetSubscribedNotificationsSourcesEventToState);
   }
 
   void _mapGetNotificationsEventToState(GetNotifications event,
@@ -56,10 +57,12 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
 
   void _mapSubscribeNotificationEventToState(SubscribeNotification event, Emitter<NotificationsState> emit) {
     notificationsRepository.subscribe(event.source);
+    add(GetSubscribedNotificationsSources());
   }
 
   void _mapUnsubscribeNotificationEventToState(UnsubscribeNotification event, Emitter<NotificationsState> emit) {
     notificationsRepository.unsubscribe(event.source);
+    add(GetSubscribedNotificationsSources());
   }
 
   void _mapFetchNotificationsEventToState(FetchNotifications event, Emitter<NotificationsState> emit) {
@@ -85,5 +88,18 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   void _mapUnreadAllNotificationsEventToState(UnreadAllNotifications event, Emitter<NotificationsState> emit) {
     notificationsRepository.unreadAll();
     add(GetNotifications());
+  }
+
+  void _mapGetSubscribedNotificationsSourcesEventToState(GetSubscribedNotificationsSources event, Emitter<NotificationsState> emit) {
+    emit(state.copyWith(status: NotificationsStatus.loading));
+
+    try {
+      emit(state.copyWith(
+          status: NotificationsStatus.success,
+          subscribedSources: notificationsRepository.getSubscribedSources()
+      ));
+    } catch (e) {
+      emit(state.copyWith(status: NotificationsStatus.error));
+    }
   }
 }

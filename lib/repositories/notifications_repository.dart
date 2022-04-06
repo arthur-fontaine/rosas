@@ -8,6 +8,8 @@ class NotificationsRepository {
 
   NotificationsRepository();
 
+  List<RosasSource> getSubscribedSources() => _subscribedSources;
+
   List<RosasNotification> getNotifications() =>
       _notifications.where((notification) => !notification.read).toList();
 
@@ -24,17 +26,21 @@ class NotificationsRepository {
       _notifications.remove(notification);
 
   void subscribe(RosasSource source) async {
-    _subscribedSources.add(source);
-    final sourceArticles = await Feedly.getSourceArticles(source);
-    _notifications.addAll(sourceArticles.map((article) => RosasNotification(
-        RosasNotificationType.article,
-        article: article,
-        read: true)));
+    if (!_subscribedSources.contains(source)) {
+      _subscribedSources.add(source);
 
-    if (auth.currentUser != null) {
-      users.doc(auth.currentUser?.uid).update({
-        "notificationsSubscribed": FieldValue.arrayUnion([source.toJSON()])
-      });
+      final sourceArticles = await Feedly.getSourceArticles(source);
+      _notifications.addAll(sourceArticles.map((article) =>
+          RosasNotification(
+              RosasNotificationType.article,
+              article: article,
+              read: true)));
+
+      if (auth.currentUser != null) {
+        users.doc(auth.currentUser?.uid).update({
+          "notificationsSubscribed": FieldValue.arrayUnion([source.toJSON()])
+        });
+      }
     }
   }
 

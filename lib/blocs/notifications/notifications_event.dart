@@ -75,3 +75,5 @@ class UnreadNotification extends NotificationsEvent {
 class ReadAllNotifications extends NotificationsEvent {}
 
 class UnreadAllNotifications extends NotificationsEvent {}
+
+class GetSubscribedNotificationsSources extends NotificationsEvent {}
