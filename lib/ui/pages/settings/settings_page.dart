@@ -37,38 +37,40 @@ class SettingsPage extends StatelessWidget {
       body: Container(
         color: Theme.of(context).colorScheme.background,
         constraints: const BoxConstraints.expand(),
-        child: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              children: [
-                SettingLink(
-                  iconData: Icons.person_outline_rounded,
-                  title: S.of(context).account,
-                  description: S.of(context).accountSettingsDescription,
-                  routeName: AccountSettingsPage.route,
-                ),
-                const SizedBox(height: 24),
-                SettingLink(
-                  iconData: Icons.imagesearch_roller_outlined,
-                  title: S.of(context).theme,
-                  description: S.of(context).themeSettingsDescription,
-                  comingSoon: true,
-                ),
-                const SizedBox(height: 24),
-                SettingLink(
-                  iconData: Icons.widgets_outlined,
-                  title: S.of(context).integrations,
-                  description: S.of(context).integrationsSettingsDescription,
-                  comingSoon: true,
-                ),
-                const SizedBox(height: 24),
-                SettingLink(
-                  iconData: Icons.info_outline_rounded,
-                  title: S.of(context).credits,
-                  description: S.of(context).creditsSettingsDescription,
-                ),
-              ],
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                children: [
+                  SettingLink(
+                    iconData: Icons.person_outline_rounded,
+                    title: S.of(context).account,
+                    description: S.of(context).accountSettingsDescription,
+                    routeName: AccountSettingsPage.route,
+                  ),
+                  const SizedBox(height: 24),
+                  SettingLink(
+                    iconData: Icons.imagesearch_roller_outlined,
+                    title: S.of(context).theme,
+                    description: S.of(context).themeSettingsDescription,
+                    comingSoon: true,
+                  ),
+                  const SizedBox(height: 24),
+                  SettingLink(
+                    iconData: Icons.widgets_outlined,
+                    title: S.of(context).integrations,
+                    description: S.of(context).integrationsSettingsDescription,
+                    comingSoon: true,
+                  ),
+                  const SizedBox(height: 24),
+                  SettingLink(
+                    iconData: Icons.info_outline_rounded,
+                    title: S.of(context).credits,
+                    description: S.of(context).creditsSettingsDescription,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -71,45 +71,47 @@ class _ChangeEmailPageState extends State<ChangeEmailPage> {
       body: Container(
         color: Theme.of(context).colorScheme.background,
         constraints: const BoxConstraints.expand(),
-        child: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                RosasTextField(
-                    placeholder: S.of(context).email,
-                    theme: Theme.of(context),
-                    controller: _emailController,
-                    autofocus: false),
-                error != null ? const SizedBox(height: 16) : Container(),
-                error != null
-                    ? Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(Icons.error,
-                              color: Theme.of(context).colorScheme.secondary),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(error!),
-                          ),
-                        ],
-                      )
-                    : Container(),
-                const SizedBox(height: 24),
-                RosasTextButton(
-                    text: S.of(context).changeEmail,
-                    fill: true,
-                    onClick: () async {
-                      try {
-                        await user.updateEmail(_emailController.text);
-                      } catch (e) {
-                        setState(() {
-                          error = S.of(context).unknownError;
-                        });
-                      }
-                    })
-              ],
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  RosasTextField(
+                      placeholder: S.of(context).email,
+                      theme: Theme.of(context),
+                      controller: _emailController,
+                      autofocus: false),
+                  error != null ? const SizedBox(height: 16) : Container(),
+                  error != null
+                      ? Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(Icons.error,
+                                color: Theme.of(context).colorScheme.secondary),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(error!),
+                            ),
+                          ],
+                        )
+                      : Container(),
+                  const SizedBox(height: 24),
+                  RosasTextButton(
+                      text: S.of(context).changeEmail,
+                      fill: true,
+                      onClick: () async {
+                        try {
+                          await user.updateEmail(_emailController.text);
+                        } catch (e) {
+                          setState(() {
+                            error = S.of(context).unknownError;
+                          });
+                        }
+                      })
+                ],
+              ),
             ),
           ),
         ),

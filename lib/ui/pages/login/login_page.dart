@@ -5,7 +5,6 @@ import 'package:rosas/generated/l10n.dart';
 import 'package:rosas/services/services_barrel.dart';
 import 'package:rosas/ui/pages/home/home_page.dart';
 import 'package:rosas/ui/widgets/widgets_barrel.dart';
-import 'package:rosas/utils/util_barrel.dart';
 
 class LoginPage extends StatefulWidget {
   static const String route = 'login';
@@ -44,11 +43,7 @@ class _LoginPageState extends State<LoginPage> {
       try {
         final userCredential = await auth.signInWithEmailAndPassword(
             email: _emailController.text, password: _passwordController.text);
-        final user = userCredential.user;
-
-        if (user != null) {
-          fetchFromCloud(context, user);
-        }
+        userCredential.user;
 
         Navigator.pushReplacementNamed(context, HomePage.route);
       } on FirebaseAuthException catch (e) {
@@ -101,40 +96,42 @@ class _LoginPageState extends State<LoginPage> {
       ),
       body: Container(
         color: Theme.of(context).colorScheme.background,
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              RosasTextField(
-                  placeholder: S.of(context).email,
-                  theme: Theme.of(context),
-                  keyboardType: TextInputType.emailAddress,
-                  controller: _emailController),
-              const SizedBox(height: 16),
-              RosasTextField(
-                  placeholder: S.of(context).password,
-                  theme: Theme.of(context),
-                  password: true,
-                  controller: _passwordController),
-              SizedBox(height: error != null ? 16 : 0),
-              error != null
-                  ? Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.error,
-                            color: Theme.of(context).colorScheme.secondary),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(error!),
-                        ),
-                      ],
-                    )
-                  : Container(),
-              const SizedBox(height: 32),
-              RosasTextButton(
-                  text: S.of(context).logIn, fill: true, onClick: login),
-            ],
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                RosasTextField(
+                    placeholder: S.of(context).email,
+                    theme: Theme.of(context),
+                    keyboardType: TextInputType.emailAddress,
+                    controller: _emailController),
+                const SizedBox(height: 16),
+                RosasTextField(
+                    placeholder: S.of(context).password,
+                    theme: Theme.of(context),
+                    password: true,
+                    controller: _passwordController),
+                SizedBox(height: error != null ? 16 : 0),
+                error != null
+                    ? Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(Icons.error,
+                              color: Theme.of(context).colorScheme.secondary),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(error!),
+                          ),
+                        ],
+                      )
+                    : Container(),
+                const SizedBox(height: 32),
+                RosasTextButton(
+                    text: S.of(context).logIn, fill: true, onClick: login),
+              ],
+            ),
           ),
         ),
       ),

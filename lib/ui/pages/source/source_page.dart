@@ -73,94 +73,102 @@ class _SourcePageState extends State<SourcePage> {
       body: Container(
         color: Theme.of(context).colorScheme.background,
         constraints: const BoxConstraints.expand(),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Column(
-                children: [
-                  SizedBox(
-                    width: 64,
-                    height: 64,
-                    child: Image.network(source.iconUrl),
-                  ),
-                  const SizedBox(height: 24),
-                  Column(
-                    children: [
-                      Text(
-                        source.title,
-                        style: Theme.of(context).textTheme.headline2?.copyWith(
-                              color: Theme.of(context).colorScheme.onBackground,
-                            ),
-                      ),
-                      Text(
-                        source.topics.map((topic) => topic.name).join(', '),
-                        style: Theme.of(context).textTheme.caption?.copyWith(
-                              color: Theme.of(context).colorScheme.onBackground,
-                            ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-                  BlocBuilder<SubscribedSourcesBloc, SubscribedSourcesState>(
-                      builder: (context, state) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Column(
+                  children: [
+                    SizedBox(
+                      width: 64,
+                      height: 64,
+                      child: Image.network(source.iconUrl),
+                    ),
+                    const SizedBox(height: 24),
+                    Column(
                       children: [
-                        state.subscribedSources.contains(source)
-                            ? RosasTextButton(
-                                text: S.of(context).subscribed,
-                                fill: false,
-                                onClick: () {
-                                  subscribedSourcesBloc
-                                      .add(UnsubscribeSource(source));
-                                })
-                            : RosasTextButton(
-                                text: S.of(context).subscribe,
-                                fill: true,
-                                onClick: () {
-                                  subscribedSourcesBloc
-                                      .add(SubscribeSource(source));
-                                }),
-                        const SizedBox(width: 12),
-                        state.subscribedSources.contains(source)
-                            ? BlocBuilder<NotificationsBloc,
-                                NotificationsState>(
-                                builder: (context, state) {
-                                  if (state.subscribedSources
-                                      .contains(source)) {
-                                    return RosasIconButton(
-                                        iconData: Icons.notifications_rounded,
-                                        fill: false,
-                                        onClick: () {
-                                          notificationsBloc.add(
-                                              UnsubscribeNotification(source));
-                                        });
-                                  } else {
-                                    return RosasIconButton(
-                                        iconData:
-                                            Icons.notification_add_rounded,
-                                        fill: true,
-                                        onClick: () {
-                                          notificationsBloc.add(
-                                              SubscribeNotification(source));
-                                        });
-                                  }
-                                },
-                              )
-                            : Container(),
+                        Text(
+                          source.title,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline2
+                              ?.copyWith(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                              ),
+                        ),
+                        Text(
+                          source.topics.map((topic) => topic.name).join(', '),
+                          style: Theme.of(context).textTheme.caption?.copyWith(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                              ),
+                        ),
                       ],
-                    );
-                  })
-                ],
-              ),
-              const SizedBox(height: 24),
-              Column(
-                children: source.articles
-                    .map((article) => ArticlePreview(article: article))
-                    .toList(),
-              )
-            ],
+                    ),
+                    const SizedBox(height: 24),
+                    BlocBuilder<SubscribedSourcesBloc, SubscribedSourcesState>(
+                        builder: (context, state) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          state.subscribedSources.contains(source)
+                              ? RosasTextButton(
+                                  text: S.of(context).subscribed,
+                                  fill: false,
+                                  onClick: () {
+                                    subscribedSourcesBloc
+                                        .add(UnsubscribeSource(source));
+                                  })
+                              : RosasTextButton(
+                                  text: S.of(context).subscribe,
+                                  fill: true,
+                                  onClick: () {
+                                    subscribedSourcesBloc
+                                        .add(SubscribeSource(source));
+                                  }),
+                          const SizedBox(width: 12),
+                          state.subscribedSources.contains(source)
+                              ? BlocBuilder<NotificationsBloc,
+                                  NotificationsState>(
+                                  builder: (context, state) {
+                                    if (state.subscribedSources
+                                        .contains(source)) {
+                                      return RosasIconButton(
+                                          iconData: Icons.notifications_rounded,
+                                          fill: false,
+                                          onClick: () {
+                                            notificationsBloc.add(
+                                                UnsubscribeNotification(
+                                                    source));
+                                          });
+                                    } else {
+                                      return RosasIconButton(
+                                          iconData:
+                                              Icons.notification_add_rounded,
+                                          fill: true,
+                                          onClick: () {
+                                            notificationsBloc.add(
+                                                SubscribeNotification(source));
+                                          });
+                                    }
+                                  },
+                                )
+                              : Container(),
+                        ],
+                      );
+                    })
+                  ],
+                ),
+                const SizedBox(height: 24),
+                Column(
+                  children: source.articles
+                      .map((article) => ArticlePreview(article: article))
+                      .toList(),
+                )
+              ],
+            ),
           ),
         ),
       ),

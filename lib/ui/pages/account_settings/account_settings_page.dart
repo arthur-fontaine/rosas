@@ -41,86 +41,88 @@ class AccountSettingsPage extends StatelessWidget {
         builder: (context, state) => Container(
           color: Theme.of(context).colorScheme.background,
           constraints: const BoxConstraints.expand(),
-          child: SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.all(24),
-              child: state.user != null && state.user?.isAnonymous == false
-                  ? Column(
-                      children: [
-                        SettingLink(
-                            title: S.of(context).email,
-                            description: state.user?.email ?? '',
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, CheckPasswordPage.route, arguments:
-                                      CheckPasswordPageArguments(
-                                          (BuildContext context) {
-                                Navigator.pushReplacementNamed(
-                                    context, ChangeEmailPage.route);
-                              }));
-                            }),
-                        const SizedBox(height: 24),
-                        SettingLink(
-                            title: S.of(context).changePassword,
+          child: SafeArea(
+            child: SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.all(24),
+                child: state.user != null && state.user?.isAnonymous == false
+                    ? Column(
+                        children: [
+                          SettingLink(
+                              title: S.of(context).email,
+                              description: state.user?.email ?? '',
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, CheckPasswordPage.route, arguments:
+                                        CheckPasswordPageArguments(
+                                            (BuildContext context) {
+                                  Navigator.pushReplacementNamed(
+                                      context, ChangeEmailPage.route);
+                                }));
+                              }),
+                          const SizedBox(height: 24),
+                          SettingLink(
+                              title: S.of(context).changePassword,
+                              description:
+                                  S.of(context).changePasswordDescription,
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, CheckPasswordPage.route, arguments:
+                                        CheckPasswordPageArguments(
+                                            (BuildContext context) {
+                                  Navigator.pushReplacementNamed(
+                                      context, ChangePasswordPage.route);
+                                }));
+                              }),
+                          const SizedBox(height: 24),
+                          SettingLink(
+                            title: S.of(context).downloadYourData,
                             description:
-                                S.of(context).changePasswordDescription,
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, CheckPasswordPage.route, arguments:
-                                      CheckPasswordPageArguments(
-                                          (BuildContext context) {
-                                Navigator.pushReplacementNamed(
-                                    context, ChangePasswordPage.route);
-                              }));
-                            }),
-                        const SizedBox(height: 24),
-                        SettingLink(
-                          title: S.of(context).downloadYourData,
-                          description:
-                              S.of(context).downloadYourDataDescription,
-                          comingSoon: true,
-                        ),
-                        const SizedBox(height: 24),
-                        SettingLink(
-                          title: S.of(context).deleteYourAccount,
-                          description:
-                              S.of(context).deleteYourAccountDescription,
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, CheckPasswordPage.route, arguments:
-                              CheckPasswordPageArguments(
-                                      (BuildContext context) {
-                                    Navigator.pushReplacementNamed(
-                                        context, DeleteAccountPage.route);
-                                  }));
-                            }),
-                        const SizedBox(height: 24),
-                        SettingLink(
-                          title: S.of(context).logOut,
-                          description: '',
-                          onTap: () async {
-                            await auth.signOut();
-                            await auth.signInAnonymously();
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ],
-                    )
-                  : Column(
-                      children: [
-                        SettingLink(
-                          title: S.of(context).logIn,
-                          description: S.of(context).logInDescription,
-                          routeName: LoginPage.route,
-                        ),
-                        const SizedBox(height: 24),
-                        SettingLink(
-                          title: S.of(context).signUp,
-                          description: S.of(context).signUpDescription,
-                          routeName: SignupPage.route,
-                        ),
-                      ],
-                    ),
+                                S.of(context).downloadYourDataDescription,
+                            comingSoon: true,
+                          ),
+                          const SizedBox(height: 24),
+                          SettingLink(
+                              title: S.of(context).deleteYourAccount,
+                              description:
+                                  S.of(context).deleteYourAccountDescription,
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, CheckPasswordPage.route, arguments:
+                                        CheckPasswordPageArguments(
+                                            (BuildContext context) {
+                                  Navigator.pushReplacementNamed(
+                                      context, DeleteAccountPage.route);
+                                }));
+                              }),
+                          const SizedBox(height: 24),
+                          SettingLink(
+                            title: S.of(context).logOut,
+                            description: '',
+                            onTap: () async {
+                              await auth.signOut();
+                              await auth.signInAnonymously();
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      )
+                    : Column(
+                        children: [
+                          SettingLink(
+                            title: S.of(context).logIn,
+                            description: S.of(context).logInDescription,
+                            routeName: LoginPage.route,
+                          ),
+                          const SizedBox(height: 24),
+                          SettingLink(
+                            title: S.of(context).signUp,
+                            description: S.of(context).signUpDescription,
+                            routeName: SignupPage.route,
+                          ),
+                        ],
+                      ),
+              ),
             ),
           ),
         ),

@@ -54,49 +54,51 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
       body: Container(
         color: Theme.of(context).colorScheme.background,
         constraints: const BoxConstraints.expand(),
-        child: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  S.of(context).deleteAccountDisclaimer,
-                  style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground),
-                ),
-                error != null ? const SizedBox(height: 16) : Container(),
-                error != null
-                    ? Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(Icons.error,
-                              color: Theme.of(context).colorScheme.secondary),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(error!),
-                          ),
-                        ],
-                      )
-                    : Container(),
-                const SizedBox(height: 24),
-                RosasTextButton(
-                    text: S.of(context).deleteYourAccount,
-                    fill: true,
-                    onClick: () async {
-                      try {
-                        await users.doc(user.uid).delete();
-                        await user.delete();
-                        await auth.signInAnonymously();
-                        Navigator.pop(context);
-                      } catch (e) {
-                        setState(() {
-                          error = S.of(context).unknownError;
-                        });
-                        rethrow;
-                      }
-                    })
-              ],
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    S.of(context).deleteAccountDisclaimer,
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground),
+                  ),
+                  error != null ? const SizedBox(height: 16) : Container(),
+                  error != null
+                      ? Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(Icons.error,
+                                color: Theme.of(context).colorScheme.secondary),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(error!),
+                            ),
+                          ],
+                        )
+                      : Container(),
+                  const SizedBox(height: 24),
+                  RosasTextButton(
+                      text: S.of(context).deleteYourAccount,
+                      fill: true,
+                      onClick: () async {
+                        try {
+                          await users.doc(user.uid).delete();
+                          await user.delete();
+                          await auth.signInAnonymously();
+                          Navigator.pop(context);
+                        } catch (e) {
+                          setState(() {
+                            error = S.of(context).unknownError;
+                          });
+                          rethrow;
+                        }
+                      })
+                ],
+              ),
             ),
           ),
         ),

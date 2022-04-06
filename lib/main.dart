@@ -79,6 +79,8 @@ class MyApp extends StatelessWidget {
 
                   if (!doc.exists) {
                     initUser(user);
+                  } else {
+                    fetchFromCloud(context, user);
                   }
                 } catch (e) {
                   rethrow;
@@ -100,7 +102,6 @@ class MyApp extends StatelessWidget {
                 Locale('fr', ''),
               ],
               onGenerateRoute: (settings) {
-                // TODO: add SafeArea on all routes
                 switch (settings.name) {
                   case HomePage.route:
                     return MaterialPageRoute(builder: (_) => const HomePage());

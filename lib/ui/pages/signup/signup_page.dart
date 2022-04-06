@@ -109,46 +109,48 @@ class _SignupPageState extends State<SignupPage> {
       ),
       body: Container(
         color: Theme.of(context).colorScheme.background,
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              RosasTextField(
-                  placeholder: S.of(context).email,
-                  theme: Theme.of(context),
-                  keyboardType: TextInputType.emailAddress,
-                  controller: _emailController),
-              const SizedBox(height: 16),
-              RosasTextField(
-                  placeholder: S.of(context).password,
-                  theme: Theme.of(context),
-                  password: true,
-                  controller: _passwordController),
-              const SizedBox(height: 16),
-              RosasTextField(
-                  placeholder: 'Confirm password',
-                  theme: Theme.of(context),
-                  password: true,
-                  controller: _confirmPasswordController),
-              SizedBox(height: error != null ? 16 : 0),
-              error != null
-                  ? Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.error,
-                            color: Theme.of(context).colorScheme.secondary),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(error!),
-                        ),
-                      ],
-                    )
-                  : Container(),
-              const SizedBox(height: 32),
-              RosasTextButton(
-                  text: S.of(context).signUp, fill: true, onClick: signup),
-            ],
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                RosasTextField(
+                    placeholder: S.of(context).email,
+                    theme: Theme.of(context),
+                    keyboardType: TextInputType.emailAddress,
+                    controller: _emailController),
+                const SizedBox(height: 16),
+                RosasTextField(
+                    placeholder: S.of(context).password,
+                    theme: Theme.of(context),
+                    password: true,
+                    controller: _passwordController),
+                const SizedBox(height: 16),
+                RosasTextField(
+                    placeholder: 'Confirm password',
+                    theme: Theme.of(context),
+                    password: true,
+                    controller: _confirmPasswordController),
+                SizedBox(height: error != null ? 16 : 0),
+                error != null
+                    ? Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(Icons.error,
+                              color: Theme.of(context).colorScheme.secondary),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(error!),
+                          ),
+                        ],
+                      )
+                    : Container(),
+                const SizedBox(height: 32),
+                RosasTextButton(
+                    text: S.of(context).signUp, fill: true, onClick: signup),
+              ],
+            ),
           ),
         ),
       ),

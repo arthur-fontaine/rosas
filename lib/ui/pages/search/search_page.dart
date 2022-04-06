@@ -76,38 +76,40 @@ class _SearchPageState extends State<SearchPage> {
         constraints: const BoxConstraints.expand(),
         color: Theme.of(context).colorScheme.background,
         padding: const EdgeInsets.all(16),
-        child: BlocBuilder<SearchBloc, SearchState>(
-          builder: (context, state) {
-            late final List<RosasSource> itemsToShow;
+        child: SafeArea(
+          child: BlocBuilder<SearchBloc, SearchState>(
+            builder: (context, state) {
+              late final List<RosasSource> itemsToShow;
 
-            if (state.term.isNotEmpty) {
-              itemsToShow = state.results;
-            } else {
-              itemsToShow = subscribedSourcesBloc.state.subscribedSources;
-            }
+              if (state.term.isNotEmpty) {
+                itemsToShow = state.results;
+              } else {
+                itemsToShow = subscribedSourcesBloc.state.subscribedSources;
+              }
 
-            return SingleChildScrollView(
-              child: Column(
-                children: itemsToShow.asMap().entries.map((entry) {
-                  int idx = entry.key;
-                  RosasSource result = entry.value;
+              return SingleChildScrollView(
+                child: Column(
+                  children: itemsToShow.asMap().entries.map((entry) {
+                    int idx = entry.key;
+                    RosasSource result = entry.value;
 
-                  late final EdgeInsets padding;
+                    late final EdgeInsets padding;
 
-                  if (idx == 0) {
-                    padding = const EdgeInsets.only(bottom: 8);
-                  } else if (idx == itemsToShow.length - 1) {
-                    padding = const EdgeInsets.only(top: 8);
-                  } else {
-                    padding = const EdgeInsets.symmetric(vertical: 8);
-                  }
+                    if (idx == 0) {
+                      padding = const EdgeInsets.only(bottom: 8);
+                    } else if (idx == itemsToShow.length - 1) {
+                      padding = const EdgeInsets.only(top: 8);
+                    } else {
+                      padding = const EdgeInsets.symmetric(vertical: 8);
+                    }
 
-                  return Padding(
-                      padding: padding, child: SearchResult(result: result));
-                }).toList(),
-              ),
-            );
-          },
+                    return Padding(
+                        padding: padding, child: SearchResult(result: result));
+                  }).toList(),
+                ),
+              );
+            },
+          ),
         ),
       ),
     );

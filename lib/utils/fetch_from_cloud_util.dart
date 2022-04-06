@@ -20,7 +20,7 @@ void fetchFromCloud(BuildContext context, User user) async {
   if (notificationsSubscribed is List<dynamic>) {
     for (var notificationSubscribed in notificationsSubscribed) {
       notificationsBloc.add(
-          AddNotification(RosasNotification.fromJSON(notificationSubscribed)));
+          SubscribeNotification(RosasSource.fromJSON(notificationSubscribed)));
     }
   }
 
