@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,6 +40,26 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final subscribedSourcesBloc = context.read<SubscribedSourcesBloc>();
+    final notificationsBloc = context.read<NotificationsBloc>();
+    final readLaterBloc = context.read<ReadLaterBloc>();
+
+    Future<void> refresh(
+        {required SubscribedSourcesBloc subscribedSourcesBloc,
+        required NotificationsBloc notificationsBloc,
+        required ReadLaterBloc readLaterBloc}) async {
+      subscribedSourcesBloc.add(FetchNews());
+      notificationsBloc.add(GetNotifications());
+      readLaterBloc.add(GetReadLaterArticles());
+    }
+
+    Timer.periodic(const Duration(seconds: 30), (timer) {
+      refresh(
+          subscribedSourcesBloc: subscribedSourcesBloc,
+          notificationsBloc: notificationsBloc,
+          readLaterBloc: readLaterBloc);
+    });
+
     return Scaffold(
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle(
@@ -168,13 +190,10 @@ class _HomePageState extends State<HomePage> {
                         BlocBuilder<SubscribedSourcesBloc,
                             SubscribedSourcesState>(
                           builder: (context, state) {
-                            final articles = state.subscribedSources
-                                .map((source) => source.articles)
-                                .expand((i) => i)
-                                .toList()
-                              ..sort((a, b) => b.published
-                                  .difference(a.published)
-                                  .inMilliseconds);
+                            final articles = [...state.articles]..sort((a, b) =>
+                                b.published
+                                    .difference(a.published)
+                                    .inMilliseconds);
 
                             if (articles.isNotEmpty) {
                               return Column(

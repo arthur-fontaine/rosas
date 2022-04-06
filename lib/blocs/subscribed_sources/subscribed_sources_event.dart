@@ -33,3 +33,7 @@ class ToggleSubscriptionSource extends SubscribedSourcesEvent {
   @override
   List<Object?> get props => [source];
 }
+
+class GetNews extends SubscribedSourcesEvent {}
+
+class FetchNews extends SubscribedSourcesEvent {}

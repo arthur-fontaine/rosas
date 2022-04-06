@@ -15,20 +15,23 @@ extension SubscribedSourcesStatusX on SubscribedSourcesStatus {
 class SubscribedSourcesState extends Equatable {
   final SubscribedSourcesStatus status;
   final List<RosasSource> subscribedSources;
+  final List<RosasArticle> articles;
 
   const SubscribedSourcesState(
       {this.status = SubscribedSourcesStatus.initial,
-        this.subscribedSources = const []});
+        this.subscribedSources = const [], this.articles = const []});
 
   @override
-  List<Object?> get props => [status, subscribedSources];
+  List<Object?> get props => [status, subscribedSources, articles];
 
   SubscribedSourcesState copyWith({
     List<RosasSource>? subscribedSources,
+    List<RosasArticle>? articles,
     SubscribedSourcesStatus? status,
   }) {
     return SubscribedSourcesState(
         status: status ?? this.status,
+        articles: articles ?? this.articles,
         subscribedSources: subscribedSources ?? this.subscribedSources);
   }
 }

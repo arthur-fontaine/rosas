@@ -4,14 +4,15 @@ import 'package:rosas/services/services_barrel.dart';
 
 class SubscribedSourcesRepository {
   final List<RosasSource> _subscribedSources = [];
+  final List<RosasArticle> _articles = [];
 
   SubscribedSourcesRepository();
 
   List<RosasSource> getSubscribedSources() => _subscribedSources;
 
-  Future<void> subscribeSource(RosasSource source) async {
+  void subscribeSource(RosasSource source) {
     if (!_subscribedSources.contains(source)) {
-      _subscribedSources.add(await source.fetchArticles());
+      _subscribedSources.add(source);
 
       if (auth.currentUser != null) {
         users.doc(auth.currentUser?.uid).update({
@@ -21,7 +22,7 @@ class SubscribedSourcesRepository {
     }
   }
 
-  Future<void> unsubscribeSource(RosasSource source) async {
+  void unsubscribeSource(RosasSource source) {
     _subscribedSources.remove(source);
 
     if (auth.currentUser != null) {
@@ -29,5 +30,16 @@ class SubscribedSourcesRepository {
         "subscribedSources": FieldValue.arrayRemove([source.toJSON()])
       });
     }
+  }
+
+  List<RosasArticle> getArticles() => _articles;
+
+  Future<void> fetchArticles() async {
+    final newSources = await Future.wait(getSubscribedSources()
+        .map((source) async => await source.fetchArticles()));
+
+    _articles.removeWhere((element) => true);
+    _articles.addAll(
+        newSources.map((source) => source.articles).expand((article) => article));
   }
 }
