@@ -38,34 +38,41 @@ class ArticlePage extends StatelessWidget {
                     style: BorderStyle.solid,
                   ))),
                   padding: const EdgeInsets.all(16),
-                  child: Row(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(),
-                          icon: const Icon(Icons.arrow_back_rounded)),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Text(
-                              article.title,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline2
-                                  ?.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground),
-                            ),
-                            const SizedBox(height: 8),
-                            ArticleCaption(article: article),
-                          ],
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              padding: EdgeInsets.zero,
+                              constraints: const BoxConstraints(),
+                              icon: const Icon(Icons.arrow_back_rounded)),
+                          Container(
+                            child: ArticleButtons(article: article),
+                            alignment: Alignment.centerRight,
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Column(
+                        children: [
+                          Text(
+                            article.title,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline2
+                                ?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground),
+                          ),
+                          const SizedBox(height: 8),
+                          ArticleCaption(article: article),
+                        ],
                       ),
                     ],
                   ),

@@ -15,12 +15,12 @@ class ArticlePart extends StatelessWidget {
     final part = article.parts[index];
 
     final preprocessedPart = preprocessArticlePart(part);
-    final text = preprocessedPart['text'] as String;
     final images = preprocessedPart['images'] as List<Map<String, String?>>;
 
     return IntrinsicHeight(
       child: Row(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(width: 16),
           Column(
@@ -66,22 +66,18 @@ class ArticlePart extends StatelessWidget {
                 const SizedBox(height: 16),
                 Padding(
                   padding: const EdgeInsets.only(right: 16),
-                  child: Text(
-                    text,
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                        color: const Color.fromRGBO(112, 112, 112, 1)),
+                  child: RichText(
+                    text: TextSpan(
+                      children: generateArticlePartTextSpan(context, part),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 images.isNotEmpty
-                    ? ArticleImageGrid(images: images, aspectRatio: 4 / 3)
+                    ? ArticleImageGrid(images: images)
                     : Container(),
                 images.isNotEmpty ? const SizedBox(height: 16) : Container(),
-                Container(
-                  padding: const EdgeInsets.only(right: 16),
-                  child: ArticleButtons(article: article),
-                  alignment: Alignment.centerRight,
-                )
+                const SizedBox(height: 16)
               ],
             ),
           ),

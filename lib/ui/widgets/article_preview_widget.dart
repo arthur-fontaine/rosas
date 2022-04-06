@@ -19,7 +19,6 @@ class ArticlePreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final preprocessedPart = preprocessArticlePart(article.parts.first);
-    final text = preprocessedPart['text'] as String;
     final images = preprocessedPart['images'] as List<Map<String, String?>>;
 
     return Column(
@@ -36,13 +35,18 @@ class ArticlePreview extends StatelessWidget {
                     color: Theme.of(context).colorScheme.onBackground),
               ),
               const SizedBox(height: 8),
-              Text(
-                text,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    ?.copyWith(color: const Color.fromRGBO(112, 112, 112, 1)),
+              RichText(
+                text: TextSpan(
+                  children: generateArticlePartTextSpan(context, article.parts.first),
+                ),
               ),
+              // Text(
+              //   text,
+              //   style: Theme.of(context)
+              //       .textTheme
+              //       .bodyText1
+              //       ?.copyWith(color: const Color.fromRGBO(112, 112, 112, 1)),
+              // ),
               const SizedBox(height: 12),
               article.parts.length > 1
                   ? GestureDetector(
