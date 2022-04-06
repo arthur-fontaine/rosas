@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rosas/blocs/blocs_barrel.dart';
 import 'package:rosas/models/models_barrel.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ArticleButtons extends StatelessWidget {
   final RosasArticle article;
@@ -34,7 +35,7 @@ class ArticleButtons extends StatelessWidget {
         const SizedBox(width: 16),
         IconButton(
           onPressed: () {
-            //  TODO: share
+            Share.share(article.url);
           },
           icon: const Icon(Icons.share_outlined),
           padding: EdgeInsets.zero,
