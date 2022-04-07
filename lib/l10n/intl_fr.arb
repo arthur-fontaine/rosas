@@ -22,7 +22,7 @@
   "signUpOrLoginDescription": "Être identifié vous permet de bénéficier d'une synchronisation entre tous vos appareils.",
   "logIn": "Se connecter",
   "logInDescription": "Connectez-vous pour bénéficier d'une synchronisation entre tous vos appareils.",
-  "signUp": "",
+  "signUp": "S'inscrire",
   "signUpDescription": "Inscrivez-vous pour bénéficier d'une synchronisation entre tous vos appareils.",
   "continueWithoutLoggingIn": "Continuer sans se connecter",
   "userNotFound": "Cet email n'est associé à aucun compte.",
